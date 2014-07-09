@@ -1,5 +1,4 @@
-class User < ActiveRecord::Base
-  attr_accessor :name, :email, :password
+class User < ActiveRecord::Validations
 
   validates :email, uniqueness: true
   validates_presence_of :name, :email, :password

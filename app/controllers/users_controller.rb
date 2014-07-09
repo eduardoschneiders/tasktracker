@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  def new
+  def signup
     @user = User.new
   end
 
@@ -8,8 +8,12 @@ class UsersController < ApplicationController
     if @user.save
       redirect_to root_path
     else
-      render action: :new
+      render action: :signup
     end
+  end
+
+  def signin
+    @session = Session.new
   end
 
   def user_params

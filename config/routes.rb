@@ -5,7 +5,11 @@ ObjectivesTracker::Application.routes.draw do
   # You can have the root of your site routed with "root"
    root 'welcome#index'
 
-   resources :users
+   #resources :users
+
+   get  'users/signup'     => "users#signup"
+   post 'users'         => "users#create"
+   get  'users/signin'  => "users#signin"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
