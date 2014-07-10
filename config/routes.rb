@@ -7,9 +7,10 @@ ObjectivesTracker::Application.routes.draw do
 
    #resources :users
 
-   get  'users/signup'     => "users#signup"
-   post 'users'         => "users#create"
+   get  'users/signup'  => "users#signup"
    get  'users/signin'  => "users#signin"
+   post 'users'         => "users#create"
+   post 'sessions'      => "session#create"
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

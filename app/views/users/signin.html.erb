@@ -5,11 +5,11 @@
 <% end %>
 
 <%= form_for @session do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %><br />
-
-  <%= f.label :email%>
+  <%= f.label :email %>
   <%= f.text_field :email %><br />
+
+  <%= f.label :password %>
+  <%= f.text_field :password %><br />
 
   <%= f.submit "Signin" %>
 <% end %>
