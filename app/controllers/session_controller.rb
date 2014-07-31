@@ -1,7 +1,8 @@
 class SessionController < ApplicationController
   def create
     @session = Session.new session_params
-    if @session.auth
+
+    if session[:current_user] = @session.auth
       redirect_to root_path
     else
       redirect_to users_signin_path

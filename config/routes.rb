@@ -12,6 +12,8 @@ ObjectivesTracker::Application.routes.draw do
    post 'users'         => "users#create"
    post 'sessions'      => "session#create"
 
+   resource 'tasks'
+
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
 

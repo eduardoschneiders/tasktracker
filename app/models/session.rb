@@ -9,10 +9,9 @@ class Session
   end
 
   def auth
-    binding.pry
     user = User.auth(@email, @password)
     if user.present?
-      return true
+      return user.public_data
     end
   end
 end
