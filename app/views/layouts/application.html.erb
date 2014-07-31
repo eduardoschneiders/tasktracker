@@ -7,8 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <%= link_to 'home', root_path %>
-  <%= link_to 'task', new_tasks_path %><br />
+<%= link_to 'Home', root_path %>
+<%= link_to 'Tasks', tasks_path %>
+<%= link_to 'Signup', users_signup_path %>
+<%= link_to 'Signin', users_signin_path %><br />
+
 <%= yield %>
 
 </body>
