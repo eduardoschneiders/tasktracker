@@ -1,4 +1,6 @@
 class TasksController < ApplicationController
+  before_filter :can_access_logged
+
   def index
     @tasks = Task.where(user: current_user)
   end

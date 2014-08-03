@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  before_filter :can_access_unlogged
+
   def signup
     @user = User.new
   end

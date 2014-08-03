@@ -10,6 +10,12 @@ class SessionController < ApplicationController
     end
   end
 
+  def signout
+    session.destroy
+    flash[:notice] = 'Signed out with success'
+    redirect_to root_path
+  end
+
   def session_params
     password = CaesarEncrypt.encrypt(params[:session][:password], 5)
     params[:session].merge!(password: password)

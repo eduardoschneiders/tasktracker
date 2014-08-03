@@ -8,9 +8,15 @@
 </head>
 <body>
 <%= link_to 'Home', root_path %>
-<%= link_to 'Tasks', tasks_path %>
-<%= link_to 'Signup', users_signup_path %>
-<%= link_to 'Signin', users_signin_path %><br />
+
+<% if current_user.present? %>
+  <%= link_to 'Tasks', tasks_path %>
+  <%= link_to 'Signout', session_signout_path, method: :post %>
+<% else %>
+  <%= link_to 'Signup', users_signup_path %>
+  <%= link_to 'Signin', users_signin_path %>
+<% end %>
+<br />
 
 <% if flash[:notice] %>
   <div class="notice"><%= flash[:notice] %></div>
