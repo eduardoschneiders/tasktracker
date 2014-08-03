@@ -4,7 +4,8 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new user_params
+    password = CaesarEncrypt.encrypt(user_params[:password], 5)
+    @user = User.new user_params.merge(password: password)
     if @user.save
       redirect_to root_path
     else

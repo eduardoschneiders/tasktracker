@@ -10,6 +10,8 @@ class SessionController < ApplicationController
   end
 
   def session_params
+    password = CaesarEncrypt.encrypt(params[:session][:password], 5)
+    params[:session].merge!(password: password)
     params.require(:session).permit(:email, :password)
   end
 end
