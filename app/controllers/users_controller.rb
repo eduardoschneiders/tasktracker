@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :can_access_unlogged
+  before_filter :can_access_unlogged, only: [:signup, :signin]
+  before_filter :can_access_logged, only: [:create, :edit, :update]
 
   def signup
     @user = User.new
@@ -19,6 +20,18 @@ class UsersController < ApplicationController
 
   def signin
     @session = Session.new
+  end
+
+  def edit
+    @user = User.find(params[:id])
+  end
+
+  def update
+    user = User.find(params[:id])
+    user.update_attributes(user_params)
+    session[:current_user][:email] = user_params[:email]
+    flash[:notice] = 'Profile edited with success'
+    redirect_to root_path
   end
 
   def user_params

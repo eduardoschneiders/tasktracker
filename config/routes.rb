@@ -14,6 +14,7 @@ ObjectivesTracker::Application.routes.draw do
    post 'session/signout'  => "session#signout"
 
    resources :tasks
+   resources :users
    post 'task/:id/complete' => "tasks#complete", as: :complete_task
 
   # Example of regular route:
