@@ -2,9 +2,11 @@
 
 <ul>
   <% @tasks.each do |task| %>
-    <li>
+    <li class="<%= 'completed' if task.completed? %>">
       <%= task.name %>
-      <%= link_to "Excluir", task_path(task), confirm: 'Are your sure?', method: :delete %>
+      <%= link_to 'Complete', complete_task_path(task), method: :post %>
+      <%= link_to 'Edit', edit_task_path(task) %>
+      <%= link_to 'Remove', task_path(task), confirm: 'Are your sure?', method: :delete %>
     </li>
   <% end %>
 </ul>

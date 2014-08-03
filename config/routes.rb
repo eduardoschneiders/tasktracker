@@ -13,6 +13,7 @@ ObjectivesTracker::Application.routes.draw do
    post 'sessions'      => "session#create"
 
    resources :tasks
+   post 'task/:id/complete' => "tasks#complete", as: :complete_task
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
