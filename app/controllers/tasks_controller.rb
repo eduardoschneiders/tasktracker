@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_filter :can_access_logged
 
   def index
-    @tasks = Task.where(user: current_user)
+    @tasks = Task.active.where(user: current_user)
   end
 
   def new
@@ -28,7 +28,8 @@ class TasksController < ApplicationController
 
   def destroy
     task = Task.find(params[:id])
-    task.destroy
+    task.deleted = true
+    task.save
     flash[:notice] = 'Task deleted with success'
     redirect_to tasks_path
   end
