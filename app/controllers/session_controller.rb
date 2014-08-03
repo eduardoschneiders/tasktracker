@@ -5,6 +5,7 @@ class SessionController < ApplicationController
     if session[:current_user] = @session.auth
       redirect_to root_path
     else
+      flash[:notice] = 'Wrong login'
       redirect_to users_signin_path
     end
   end

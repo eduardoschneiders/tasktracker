@@ -9,6 +9,7 @@ class TasksController < ApplicationController
 
   def create
     Task.create(task_params.merge(user: current_user))
+    flash[:notice] = 'Task created with success'
     redirect_to tasks_path
   end
 
@@ -19,12 +20,14 @@ class TasksController < ApplicationController
   def update
     task = Task.find(params[:id])
     task.update_attributes(task_params)
+    flash[:notice] = 'Task updated with success'
     redirect_to tasks_path
   end
 
   def destroy
     task = Task.find(params[:id])
     task.destroy
+    flash[:notice] = 'Task deleted with success'
     redirect_to tasks_path
   end
 
@@ -32,6 +35,7 @@ class TasksController < ApplicationController
     task = Task.find(params[:id])
     task.completed = true
     task.save
+    flash[:notice] = 'Task updated with success'
     redirect_to tasks_path
   end
 
