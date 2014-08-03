@@ -1,10 +1,20 @@
 class TasksController < ApplicationController
+  def index
+    @tasks = Task.where(user: current_user)
+  end
+
   def new
     @task = Task.new
   end
 
   def create
-    Task.create(task_params)
+    Task.create(task_params.merge(user: current_user))
+    redirect_to tasks_path
+  end
+
+  def destroy
+    task = Task.find(params[:id])
+    task.destroy
     redirect_to tasks_path
   end
 
