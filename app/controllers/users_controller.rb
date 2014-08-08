@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_filter :can_access_unlogged, only: [:signup, :signin]
-  before_filter :can_access_logged, only: [:create, :edit, :update]
+  before_filter :can_access_unlogged, only: [:signup, :signin, :create]
+  before_filter :can_access_logged, only: [:edit, :update]
 
   def signup
     @user = User.new
