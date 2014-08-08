@@ -35,8 +35,9 @@ class TasksController < ApplicationController
   end
 
   def complete
-    task = Task.find(params[:id])
-    task.completed = true
+    task              = Task.find(params[:id])
+    task.completed    = true
+    task.completed_at = Time.now
     task.save
     flash[:notice] = 'Task updated with success'
     redirect_to tasks_path
