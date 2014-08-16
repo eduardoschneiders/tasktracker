@@ -1,1 +1,19 @@
 index
+<% content_for :head_javascripts do %>
+  <%= javascript_tag do %>
+    google.load("visualization", "1", {packages:["corechart"]});
+    google.setOnLoadCallback(drawChart);
+    function drawChart() {
+    var data = google.visualization.arrayToDataTable(<%= @tasks.to_s.html_safe %>);
+
+      var options = {
+        title: 'Tasks Performance'
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+      chart.draw(data, options);
+    }
+  <% end %>
+<% end %>
+
+<div id="chart_div"></div>
