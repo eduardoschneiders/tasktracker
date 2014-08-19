@@ -4,11 +4,13 @@ class User < ActiveRecord::Base
   validates :email, uniqueness: true
   validates_presence_of :name, :email, :password
 
-  def self.auth(email, password)
-    User.where(email: email, password: password).first
+  before_create :encrypt_password!
+
+  def encrypt_password!
+    self.password = self.encrypted_password(password)
   end
 
-  def public_data
-    { name: self.name, email: self.email }
+  def self.encrypted_password(password)
+    CaesarEncrypt.encrypt(passwrd, 5)
   end
 end

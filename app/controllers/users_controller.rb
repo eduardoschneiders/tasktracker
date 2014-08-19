@@ -18,10 +18,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def signin
-    @session = Session.new
-  end
-
   def edit
     @user = User.find(params[:id])
   end

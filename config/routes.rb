@@ -10,9 +10,8 @@ ObjectivesTracker::Application.routes.draw do
    get  'users/signup'  => "users#signup"
    get  'users/signin'  => "users#signin"
    post 'users'         => "users#create"
-   post 'session'      => "session#create"
-   post 'session/signout'  => "session#signout"
 
+   resources :session, only: [:new, :create, :destroy]
    resources :tasks
    resources :users
    post 'task/:id/complete' => "tasks#complete", as: :complete_task

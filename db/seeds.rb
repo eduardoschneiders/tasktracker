@@ -8,7 +8,7 @@
 User.delete_all
 Task.delete_all
 
-user = User.create(name: 'Eduardo', email: 'eduardo.m.schneiders@gmail.com', password: CaesarEncrypt.encrypt('eduardo', 5))
+user = User.create(name: 'Eduardo', email: 'eduardo.m.schneiders@gmail.com', password: 'eduardo')
 5.times do |i|
   Task.create(name: "Task seed #{i}", user: user, completed: true, completed_at: Time.now)
 end

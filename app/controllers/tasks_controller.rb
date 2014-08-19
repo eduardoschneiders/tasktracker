@@ -39,8 +39,7 @@ class TasksController < ApplicationController
     task.completed    = true
     task.completed_at = Time.now
     task.save
-    flash[:notice] = 'Task updated with success'
-    redirect_to tasks_path
+    render :nothing
   end
 
   private
