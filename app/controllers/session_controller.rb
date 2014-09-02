@@ -11,11 +11,11 @@ class SessionController < ApplicationController
       redirect_to root_path
     else
       flash[:notice] = 'Wrong login'
-      redirect_to users_signin_path
+      redirect_to new_session_path
     end
   end
 
-  def destroy 
+  def destroy
     session.delete(:current_user_id)
     flash[:notice] = 'Signed out with success'
     redirect_to root_path

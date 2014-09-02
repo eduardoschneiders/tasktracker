@@ -8,7 +8,6 @@ ObjectivesTracker::Application.routes.draw do
    #resources :users
 
    get  'users/signup'  => "users#signup"
-   get  'users/signin'  => "users#signin"
    post 'users'         => "users#create"
 
    resources :session, only: [:new, :create, :destroy]

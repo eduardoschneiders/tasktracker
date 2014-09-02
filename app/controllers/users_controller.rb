@@ -7,8 +7,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    password = CaesarEncrypt.encrypt(user_params[:password], 5)
-    @user = User.new user_params.merge(password: password)
+    @user = User.new user_params
     if @user.save
       flash[:notice] = 'User created with success'
       redirect_to root_path

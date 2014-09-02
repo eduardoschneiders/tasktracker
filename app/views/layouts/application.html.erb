@@ -13,14 +13,14 @@
 
 <% if current_user.present? %>
   <%= link_to 'Tasks', tasks_path %>
-  <%= link_to 'Signout', session_signout_path, method: :post %>
+  <%= link_to 'Signout', session_path(session[:current_user_id]), method: :delete %>
 
   <span class="current_user_credentials">
     Welcome <%=link_to current_user.name, edit_user_path(current_user) %>
   </span>
 <% else %>
   <%= link_to 'Signup', users_signup_path %>
-  <%= link_to 'Signin', users_signin_path %>
+  <%= link_to 'Signin', new_session_path %>
 <% end %>
 <br />
 

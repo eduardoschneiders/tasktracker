@@ -7,10 +7,10 @@ class User < ActiveRecord::Base
   before_create :encrypt_password!
 
   def encrypt_password!
-    self.password = self.encrypted_password(password)
+      self.password = User.encrypted_password(password)
   end
 
   def self.encrypted_password(password)
-    CaesarEncrypt.encrypt(passwrd, 5)
+    CaesarEncrypt.encrypt(password, 5)
   end
 end
