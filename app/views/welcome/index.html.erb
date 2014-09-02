@@ -1,19 +1,29 @@
 index
 <% content_for :head_javascripts do %>
   <%= javascript_tag do %>
-    google.load("visualization", "1", {packages:["corechart"]});
-    google.setOnLoadCallback(drawChart);
-    function drawChart() {
-    var data = google.visualization.arrayToDataTable(<%= @tasks.to_s.html_safe %>);
+    <% if current_user && @tasks.any? %>
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
 
-      var options = {
-        title: 'Tasks Performance'
-      };
+      function drawChart() {
+        var header  = [['Day', 'Tasks completed']],
+            tasks   = header.concat(<%= @tasks.to_s.html_safe %>),
+            data    = google.visualization.arrayToDataTable(tasks),
 
-      var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-      chart.draw(data, options);
-    }
+            options = {
+              title: 'Tasks Performance'
+            },
+
+            chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+      }
+    <% end %>
   <% end %>
 <% end %>
 
-<div id="chart_div"></div>
+<% if current_user %>
+  <div id="chart_div"></div>
+<% else %>
+  We have about users  <%= @users_count %> using the system and <%= @tasks_count %> tasks registered in.
+<% end %>
