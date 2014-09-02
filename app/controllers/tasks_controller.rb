@@ -35,11 +35,11 @@ class TasksController < ApplicationController
   end
 
   def complete
-    task              = Task.find(params[:id])
+    task              = current_user.tasks.find(params[:id])
     task.completed    = true
     task.completed_at = Time.now
     task.save
-    render :nothing
+    render nothing: true
   end
 
   private
