@@ -1,34 +1,34 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>ObjectivesTracker</title>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "https://www.google.com/jsapi"%>
-  <%= csrf_meta_tags %>
-  <%= yield :head_javascripts %>
-</head>
-<body>
-<%= link_to 'Home', root_path %>
+  <head>
+    <title>ObjectivesTracker</title>
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "https://www.google.com/jsapi"%>
+    <%= csrf_meta_tags %>
+    <%= yield :head_javascripts %>
+  </head>
+  <body>
+    <%= link_to 'Home', root_path %>
 
-<% if current_user.present? %>
-  <%= link_to 'Tasks', tasks_path %>
-  <%= link_to 'Signout', session_path(session[:current_user_id]), method: :delete %>
+    <% if current_user.present? %>
+      <%= link_to 'Tasks', tasks_path %>
+      <%= link_to 'Signout', session_path(session[:current_user_id]), method: :delete %>
 
-  <span class="current_user_credentials">
-    Welcome <%=link_to current_user.name, edit_user_path(current_user) %>
-  </span>
-<% else %>
-  <%= link_to 'Signup', users_signup_path %>
-  <%= link_to 'Signin', new_session_path %>
-<% end %>
-<br />
+      <span class="current_user_credentials">
+        Welcome <%=link_to current_user.name, edit_user_path(current_user) %>
+      </span>
+    <% else %>
+      <%= link_to 'Signup', users_signup_path %>
+      <%= link_to 'Signin', new_session_path %>
+    <% end %>
+    <br />
 
-<% if flash[:notice] %>
-  <div class="notice"><%= flash[:notice] %></div>
-<% end %>
+    <% if flash[:notice] %>
+      <div class="notice"><%= flash[:notice] %></div>
+    <% end %>
 
-<%= yield %>
+    <%= yield %>
 
-</body>
+  </body>
 </html>
