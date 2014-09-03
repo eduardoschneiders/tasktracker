@@ -1,0 +1,3 @@
+(function(objectivesTracker, $){
+
+})(objectivesTracker, Jquery);
