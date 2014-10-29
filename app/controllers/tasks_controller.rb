@@ -30,16 +30,25 @@ class TasksController < ApplicationController
     task = Task.find(params[:id])
     task.deleted = true
     task.save
-    flash[:notice] = 'Task deleted with success'
-    redirect_to tasks_path
+
+    respond_to do |format|
+      if task.save
+        format.json { render json: { task: task, message: 'Task deleted with success' }, status: :created, location: task }
+      end
+    end
+
   end
 
   def complete
     task              = current_user.tasks.find(params[:id])
     task.completed    = true
     task.completed_at = Time.now
-    task.save
-    render nothing: true
+
+    respond_to do |format|
+      if task.save
+        format.json { render json: { task: task, message: 'Task completed with success' }, status: :created, location: task }
+      end
+    end
   end
 
   private

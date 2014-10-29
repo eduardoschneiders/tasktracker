@@ -1,12 +1,12 @@
 <%= link_to 'New', new_task_path %>
 
-<ul>
+<ul id="tasks-list">
   <% @tasks.each do |task| %>
-    <li class="<%= 'completed' if task.completed? %>">
+    <li class="<%= 'completed' if task.completed? %>" id="task_<%= task.id %>">
       <%= task.name %>
-      <%= link_to 'Complete', complete_task_path(task), method: :post, remote: true %>
-      <%= link_to 'Edit', edit_task_path(task) %>
-      <%= link_to 'Remove', task_path(task), data: { confirm: 'Are your sure?' }, method: :delete %>
+      <%= link_to 'Complete', complete_task_path(task), id: 'complete', method: :post, remote: true %>
+      <%= link_to 'Edit', edit_task_path(task), id: 'edit' %>
+      <%= link_to 'Remove', task_path(task), id: 'remove', data: { confirm: 'Are your sure?' }, method: :delete, remote: true %>
     </li>
   <% end %>
 </ul>
