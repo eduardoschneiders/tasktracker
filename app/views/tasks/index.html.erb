@@ -9,4 +9,6 @@
       <%= link_to 'Remove', task_path(task), id: 'remove', data: { confirm: 'Are your sure?' }, method: :delete, remote: true %>
     </li>
   <% end %>
+
+  <%= will_paginate @tasks %>
 </ul>
