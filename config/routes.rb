@@ -14,6 +14,7 @@ ObjectivesTracker::Application.routes.draw do
    resources :tasks
    resources :users
    post 'task/:id/complete' => "tasks#complete", as: :complete_task
+   post 'task/:id/uncomplete' => "tasks#uncomplete", as: :uncomplete_task
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

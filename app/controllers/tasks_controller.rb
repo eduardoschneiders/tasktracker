@@ -46,7 +46,19 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if task.save
-        format.json { render json: { task: task, message: 'Task completed with success' }, status: :created, location: task }
+        format.json { render json: { task: task, message: 'Task marked as completed with success' }, status: :ok, location: task }
+      end
+    end
+  end
+
+  def uncomplete
+    task              = current_user.tasks.find(params[:id])
+    task.completed    = false
+    task.completed_at = nil
+
+    respond_to do |format|
+      if task.save
+        format.json { render json: { task: task, message: 'Task marked as uncompleted with success' }, status: :ok, location: task }
       end
     end
   end

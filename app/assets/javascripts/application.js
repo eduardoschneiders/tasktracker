@@ -15,3 +15,7 @@
 //= require turbolinks
 
 if(!objectivesTracker) var objectivesTracker = {};
+
+$(document).ready(function (){
+  $('#notice').delay(3000).fadeOut('fast');
+})

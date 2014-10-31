@@ -1,13 +1,13 @@
 index
 <% content_for :head_javascripts do %>
   <%= javascript_tag do %>
-    <% if current_user && @tasks.any? %>
+    <% if current_user && @completed_tasks.any? %>
       google.load("visualization", "1", {packages:["corechart"]});
       google.setOnLoadCallback(drawChart);
 
       function drawChart() {
-        var header  = [['Day', 'Tasks completed']],
-            tasks   = header.concat(<%= @tasks.to_s.html_safe %>),
+        var header  = [['Day', 'Completed', 'Uncompleted']],
+            tasks   = header.concat(<%= @completed_tasks.to_s.html_safe %>),
             data    = google.visualization.arrayToDataTable(tasks),
 
             options = {

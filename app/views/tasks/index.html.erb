@@ -1,14 +1,20 @@
-<%= link_to 'New', new_task_path %>
+<h2 class="title">
+  Tasks
+  <%= link_to 'New Task', new_task_path, class: 'btn btn-primary right' %>
+</h2>
 
-<ul id="tasks-list">
+<table id="tasks-list" class="table table-condensed table-striped table-hover">
   <% @tasks.each do |task| %>
-    <li class="<%= 'completed' if task.completed? %>" id="task_<%= task.id %>">
-      <%= task.name %>
-      <%= link_to 'Complete', complete_task_path(task), id: 'complete', method: :post, remote: true %>
-      <%= link_to 'Edit', edit_task_path(task), id: 'edit' %>
-      <%= link_to 'Remove', task_path(task), id: 'remove', data: { confirm: 'Are your sure?' }, method: :delete, remote: true %>
-    </li>
+    <tr class="<%= 'completed' if task.completed? %>" id="task_<%= task.id %>">
+      <td class="col-md-8 name"><%= task.name %></td>
+      <td class="col-md-2 text-center">
+        <%= link_to 'Set as complete', complete_task_path(task), id: 'complete', method: :post, remote: true, style: task.completed? ? 'display: none' : '' %>
+        <%= link_to 'Set as uncomplete', uncomplete_task_path(task), id: 'uncomplete', method: :post, remote: true, style: task.completed? ? '' : 'display: none'  %>
+      </td>
+      <td class="col-md-1 text-center"><%= link_to 'Edit', edit_task_path(task), id: 'edit' %></td>
+      <td class="col-md-1 text-center"><%= link_to 'Remove', task_path(task), id: 'remove', data: { confirm: 'Are your sure?' }, method: :delete, remote: true %></td>
+    </tr>
   <% end %>
+</table>
 
-  <%= will_paginate @tasks %>
-</ul>
+<%= will_paginate @tasks %>
