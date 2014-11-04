@@ -7,9 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 # User.delete_all
 Task.delete_all
+user = User.create(name: 'Eduardo', email: 'eduardo@gmail.com', password: 'p@ssw0rd')
 
-# user = User.create(name: 'Eduardo', email: 'eduardo.m.schneiders@gmail.com', password: 'p@ssw0rd')
-user = User.first
 5.times do |i|
   Task.create(name: "Task seed completed #{i}", user: user, completed: true, completed_at: Time.now, created_at: 1.day.ago)
 end
