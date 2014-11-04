@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require_tree ./controllers
 
 if(!objectivesTracker) var objectivesTracker = {};
 
