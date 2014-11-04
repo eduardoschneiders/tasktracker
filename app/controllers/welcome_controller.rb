@@ -1,18 +1,15 @@
 class WelcomeController < ApplicationController
   def index
     if current_user
-      completed_tasks = 0
-      @tasks = []
-      @completed_tasks = current_user.tasks.where('completed_at >= ?', 30.days.ago).group('date(completed_at)').count.to_a
-      @uncompleted_tasks = current_user.tasks.where('completed_at IS NULL').group('date(created_at)').count.to_a
-      @completed_tasks.each do |day|
-        completed_tasks += day[1]
-        uncompleted_tasks = current_user.tasks.where('completed_at IS NULL and created_at <= ?', Date.parse(day[0])).count
-        @tasks << [day[0], completed_tasks, uncompleted_tasks]
-      end
-        binding.pry
-      30.days.map do |day|
-      end
+      # completed_tasks = 0
+      # @tasks = []
+      # @completed_tasks = current_user.tasks.where('completed_at >= ?', 30.days.ago).group('date(completed_at)').count.to_a
+      # @uncompleted_tasks = current_user.tasks.where('completed_at IS NULL').group('date(created_at)').count.to_a
+      # @completed_tasks.each do |day|
+      #   completed_tasks += day[1]
+      #   uncompleted_tasks = current_user.tasks.where('completed_at IS NULL and created_at <= ?', Date.parse(day[0])).count
+      #   @tasks << [day[0], completed_tasks, uncompleted_tasks]
+      # end
 
       # [date, completed, unconpleted]
       @completed_tasks = [
