@@ -1,3 +1,0 @@
-(function(objectivesTracker, $){
-
-})(objectivesTracker, Jquery);
