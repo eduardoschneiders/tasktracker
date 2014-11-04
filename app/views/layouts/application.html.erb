@@ -56,6 +56,5 @@
     </div>
     <% js_file_path = "controllers/#{controller_name}/#{action_name}.js" %>
     <% assets_path = "#{Rails.root}/app/assets/javascripts/" %>
-    <%= javascript_include_tag js_file_path if File.exists?(assets_path + js_file_path) %>
   </body>
 </html>
