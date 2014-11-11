@@ -1,29 +1,17 @@
-index
-<% content_for :head_javascripts do %>
-  <%= javascript_tag do %>
-    <% if current_user && @completed_tasks.any? %>
-      google.load("visualization", "1", {packages:["corechart"]});
-      google.setOnLoadCallback(drawChart);
-
-      function drawChart() {
-        var header  = [['Day', 'Completed', 'Uncompleted']],
-            tasks   = header.concat(<%= @completed_tasks.to_s.html_safe %>),
-            data    = google.visualization.arrayToDataTable(tasks),
-
-            options = {
-              title: 'Tasks Performance'
-            },
-
-            chart = new google.visualization.LineChart(document.getElementById('chart_div'));
-
-        chart.draw(data, options);
-      }
-    <% end %>
-  <% end %>
-<% end %>
-
 <% if current_user %>
-  <div id="chart_div"></div>
+  <div id="graph" style="height: 250px;"></div>
+
+  <script>
+    var graph = Morris.Line({
+      element: 'graph',
+      data: <%= @processed_tasks.to_json.to_s.html_safe %>,
+      xkey: 'day',
+      ykeys: ['done', 'todo'],
+      labels: ['Done', 'To do'],
+      parseTime: false,
+      hideHover: true
+    });
+  </script>
 <% else %>
   We have about <%= @users_count %> users using the system and <%= @tasks_count %> tasks registered in.
 <% end %>
