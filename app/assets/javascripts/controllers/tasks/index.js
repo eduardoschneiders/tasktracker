@@ -1,15 +1,15 @@
 (function(objectivesTracker){
-  $('table#tasks-list tr td a#complete').on("ajax:success", function(e, data, status, xhr){
+  $('table#tasks-list tr td a.complete').on("ajax:success", function(e, data, status, xhr){
     $(this).parent().parent().addClass('completed');
     $(this).hide();
-    $(this).parent().find('#uncomplete').show();
+    $(this).parent().find('.uncomplete').show();
     update_flash(data.message);
   });
 
-  $('table#tasks-list tr td a#uncomplete').on("ajax:success", function(e, data, status, xhr){
+  $('table#tasks-list tr td a.uncomplete').on("ajax:success", function(e, data, status, xhr){
     $(this).parent().parent().removeClass('completed');
     $(this).hide();
-    $(this).parent().find('#complete').show();
+    $(this).parent().find('.complete').show();
     update_flash(data.message);
   });
 

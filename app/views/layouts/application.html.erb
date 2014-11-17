@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ObjectivesTracker</title>
+    <title>Task tracker</title>
     <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
     <%= javascript_include_tag "https://www.google.com/jsapi"%>
@@ -25,7 +25,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <%= link_to 'Objectives Tracker', root_path, class: 'navbar-brand' %>
+          <%= link_to 'Task tracker', root_path, class: 'navbar-brand' %>
         </div>
         <div id="navbar" class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
@@ -56,7 +56,7 @@
       <hr>
 
       <footer>
-        <p>© Objectives Tracker 2014</p>
+        <p>© Task Tracker <%= Date.today.strftime('%Y') %></p>
       </footer>
     </div>
     <% js_file_path = "controllers/#{controller_name}/#{action_name}.js" %>

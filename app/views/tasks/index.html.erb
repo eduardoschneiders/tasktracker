@@ -8,8 +8,8 @@
     <tr class="<%= 'completed' if task.completed? %>" id="task_<%= task.id %>">
       <td class="col-md-8 name"><%= task.name %></td>
       <td class="col-md-2 text-center">
-        <%= link_to 'Set as complete', complete_task_path(task), id: 'complete', method: :post, remote: true, style: task.completed? ? 'display: none' : '' %>
-        <%= link_to 'Set as uncomplete', uncomplete_task_path(task), id: 'uncomplete', method: :post, remote: true, style: task.completed? ? '' : 'display: none'  %>
+        <%= link_to 'Set as complete', complete_task_path(task), class: 'complete', method: :post, remote: true, style: task.completed? ? 'display: none' : '' %>
+        <%= link_to 'Set as uncomplete', uncomplete_task_path(task), class: 'uncomplete', method: :post, remote: true, style: task.completed? ? '' : 'display: none'  %>
       </td>
       <td class="col-md-1 text-center"><%= link_to 'Edit', edit_task_path(task), id: 'edit' %></td>
       <td class="col-md-1 text-center"><%= link_to 'Remove', task_path(task), id: 'remove', data: { confirm: 'Are your sure?' }, method: :delete, remote: true %></td>
