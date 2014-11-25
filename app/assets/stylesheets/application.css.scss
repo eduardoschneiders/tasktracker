@@ -8,15 +8,16 @@
  * You're free to add application-wide styles to this file and they'll appear at the top of the
  * compiled file, but it's generally better to create a new file per style scope.
  *
+ *= require morris
  *= require_self
  *= require_tree .
  */
-@import 'bootstrap';           
+@import 'bootstrap';
 
 body       { padding-top: 50px; margin-top: 30px; }
 .title     { margin-bottom: 20px; margin-top: 20px; }
-.completed { 
-  opacity: 0.5; 
+.completed {
+  opacity: 0.5;
 
   td.name { text-decoration: line-through; }
 }

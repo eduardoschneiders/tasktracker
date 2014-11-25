@@ -13,6 +13,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require morris.min
+//= require raphael-min
 
 if(!objectivesTracker) var objectivesTracker = {};
 
