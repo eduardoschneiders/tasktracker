@@ -11,7 +11,7 @@ class TasksController < ApplicationController
 
   def create
     Task.create(task_params.merge(user: current_user))
-    flash[:notice] = 'Task created with success'
+    flash[:notice] = 'Task created with success.'
     redirect_to tasks_path
   end
 
@@ -22,7 +22,7 @@ class TasksController < ApplicationController
   def update
     task = Task.find(params[:id])
     task.update_attributes(task_params)
-    flash[:notice] = 'Task updated with success'
+    flash[:notice] = 'Task updated with success.'
     redirect_to tasks_path
   end
 
@@ -33,7 +33,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if task.save
-        format.json { render json: { task: task, message: 'Task deleted with success' }, status: :created, location: task }
+        format.json { render json: { task: task, message: 'Task deleted with success.' }, status: :created, location: task }
       end
     end
 
@@ -46,7 +46,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if task.save
-        format.json { render json: { task: task, message: 'Task marked as completed with success' }, status: :ok, location: task }
+        format.json { render json: { task: task, message: 'Task marked as completed with success.' }, status: :ok, location: task }
       end
     end
   end
@@ -58,7 +58,7 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if task.save
-        format.json { render json: { task: task, message: 'Task marked as uncompleted with success' }, status: :ok, location: task }
+        format.json { render json: { task: task, message: 'Task marked as uncompleted with success.' }, status: :ok, location: task }
       end
     end
   end

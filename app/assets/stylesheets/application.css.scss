@@ -16,11 +16,14 @@
 
 body       { padding-top: 50px; margin-top: 30px; }
 .title     { margin-bottom: 20px; margin-top: 20px; }
+
 .completed {
   opacity: 0.5;
-
   td.name { text-decoration: line-through; }
 }
+
+.alert    { position: fixed; top: 20px; z-index: 1500; left: 40%; }
+
 .left       { float: left; }
 .right      { float: right; }
 .margin-top     { margin-top: 30px; }
