@@ -2,10 +2,10 @@ class WelcomeController < ApplicationController
   def index
     if current_user
       tasks                   = { done: {}, todo: {} }
-      total_uncompleted_tasks = current_user.tasks.where('created_at < ?', 1.month.ago).count
-      uncompleted_tasks       = current_user.tasks.where('created_at >= ?', 1.month.ago).group('date(created_at)').count.to_a
+      total_uncompleted_tasks = current_user.tasks.active.where('created_at < ?', 1.month.ago).count
+      uncompleted_tasks       = current_user.tasks.active.where('created_at >= ?', 1.month.ago).group('date(created_at)').count.to_a
       total_completed_tasks   = 0
-      completed_tasks         = current_user.tasks.where('completed_at >= ?', 1.month.ago).group('date(completed_at)').count.to_a
+      completed_tasks         = current_user.tasks.active.where('completed_at >= ?', 1.month.ago).group('date(completed_at)').count.to_a
 
       uncompleted_tasks.each do |task|
         day = task[0].split('-').last
@@ -25,7 +25,7 @@ class WelcomeController < ApplicationController
       stop              = Date.today.to_date
       @processed_tasks  = []
       total_done        = 0
-      total_todo        = current_user.tasks.where('created_at < ?', 1.month.ago).count
+      total_todo        = current_user.tasks.active.where('created_at < ?', 1.month.ago).count
 
       (start..stop).each do |date|
         day         = date.strftime('%d')
