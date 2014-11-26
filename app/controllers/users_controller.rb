@@ -24,7 +24,6 @@ class UsersController < ApplicationController
   def update
     user = User.find(params[:id])
     user.update_attributes(user_params)
-    session[:current_user][:email] = user_params[:email]
     flash[:notice] = 'Profile edited with success'
     redirect_to root_path
   end
