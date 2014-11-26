@@ -17,3 +17,4 @@
 //= require morris.min
 //= require raphael-min
 //= require common
+//= require_tree ./controllers

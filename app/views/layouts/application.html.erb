@@ -21,9 +21,6 @@
         <p>© Task Tracker <%= Date.today.strftime('%Y') %></p>
       </footer>
     </div>
-    <% js_file_path = "controllers/#{controller_name}.js" %>
-    <% assets_path = "#{Rails.root}/app/assets/javascripts/" %>
-    <%= javascript_include_tag js_file_path if File.exists?(assets_path + js_file_path) %>
     <%= yield :footer_javascripts%>
   </body>
 </html>
