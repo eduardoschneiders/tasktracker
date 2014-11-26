@@ -37,14 +37,10 @@ end
 group :development, :test do
   gem 'pry'
   gem 'pry-nav'
-
-  # Use sqlite3 as the database for Active Record
-  gem 'sqlite3'
 end
 
-group :production do
-  gem 'pg'
-  gem 'rails_12factor'
+group :development do
+  gem 'sqlite3'
 end
 
 group :production do
