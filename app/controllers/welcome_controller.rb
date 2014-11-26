@@ -8,15 +8,15 @@ class WelcomeController < ApplicationController
       completed_tasks         = current_user.tasks.active.where('completed_at >= ?', 1.month.ago).group('date(completed_at)').count.to_a
 
       uncompleted_tasks.each do |task|
-        day = task[0].split('-').last
-        month = task[0].split('-')[1]
+        day = task[0].to_s.split('-').last
+        month = task[0].to_s.split('-')[1]
         key = "#{day}/#{month}"
         tasks[:todo][key] = task[1]
       end
 
       completed_tasks.each do |task|
-        day = task[0].split('-').last
-        month = task[0].split('-')[1]
+        day = task[0].to_s.split('-').last
+        month = task[0].to_s.split('-')[1]
         key = "#{day}/#{month}"
         tasks[:done][key] = task[1]
       end
