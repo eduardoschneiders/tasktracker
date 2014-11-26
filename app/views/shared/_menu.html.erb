@@ -11,18 +11,19 @@
     </div>
     <div class="collapse navbar-collapse" id="navbar">
       <ul class="nav navbar-nav">
+        <li class="<%= active_menu(root_path) %>"><%= link_to 'Home', root_path %></li>
         <% if current_user.present? %>
-          <li class="active"><%= link_to 'Tasks', tasks_path %></li>
+          <li class="<%= active_menu(tasks_path) %>"><%= link_to 'Tasks', tasks_path %></li>
         <% end %>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
         <% if current_user.present? %>
-          <li><%= link_to current_user.name, edit_user_path(current_user) %></li>
+          <li class="<%= active_menu(edit_user_path(current_user)) %>"><%= link_to current_user.name, edit_user_path(current_user) %></li>
           <li><%= link_to 'Signout', session_path(session[:current_user_id]), method: :delete %></li>
         <% else %>
-          <li><%= link_to 'Signup', users_signup_path %></li>
-          <li><%= link_to 'Signin', new_session_path %></li>
+          <li class="<%= active_menu(users_signup_path) %>"><%= link_to 'Signup', users_signup_path %></li>
+          <li class="<%= active_menu(new_session_path) %>"><%= link_to 'Signin', new_session_path %></li>
         <% end %>
       </ul>
     </div>
