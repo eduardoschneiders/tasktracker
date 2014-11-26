@@ -18,3 +18,9 @@
 </table>
 
 <%= will_paginate @tasks %>
+
+<% content_for :footer_javascripts do %>
+  <% javascript_tag do %>
+    new taskTracker.ControlMessages();
+  <% end %>
+<% end %>
