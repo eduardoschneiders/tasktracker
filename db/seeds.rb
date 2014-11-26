@@ -7,8 +7,11 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.delete_all
 Task.delete_all
+user = User.create(name: 'Eduardo', email: 'eduardo@gmail.com', password: 'p@ssw0rd')
 
-user = User.create(name: 'Eduardo', email: 'eduardo.m.schneiders@gmail.com', password: 'p@ssw0rd')
+5.times do |i|
+  Task.create(name: "Task seed completed #{i}", user: user, completed: true, completed_at: Time.now, created_at: 1.day.ago)
+end
 
 t_before1 = Task.create(name: "Task seed todo before 30 days", user: user, created_at: 8.months.ago)
 t_before2 = Task.create(name: "Task seed todo before 30 days", user: user, created_at: 8.months.ago)
