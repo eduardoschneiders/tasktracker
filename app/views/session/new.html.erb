@@ -6,7 +6,7 @@
 
 <%= form_for @session, url: session_index_path, method: 'post' do |f| %>
   <%= f.label :email %>
-  <%= f.text_field :email %><br />
+  <%= f.text_field :email, autofocus: true %><br />
 
   <%= f.label :password %>
   <%= f.password_field :password %><br />
