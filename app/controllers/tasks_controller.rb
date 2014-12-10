@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_filter :can_access_logged
 
   def index
-    @tasks = Task.active.where(user: current_user).order('created_at DESC').paginate(page: params[:page], per_page: 15)
+    @groups = Group.all
   end
 
   def new

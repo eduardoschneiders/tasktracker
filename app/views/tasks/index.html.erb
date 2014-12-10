@@ -3,29 +3,31 @@
   <%= link_to 'New Task', new_task_path, class: 'btn btn-primary right' %>
 </h2>
 
-<table id="tasks-list" class="table table-condensed table-striped table-hover">
-  <% @tasks.each do |task| %>
-    <tr class="<%= 'completed' if task.completed? %>" id="task_<%= task.id %>">
-      <td class="col-md-1">
-        <%
-          if task.completed?
-            task_url = uncomplete_task_path(task)
-            task_class = :uncomplete
-          else
-            task_url = complete_task_path(task)
-            task_class = :complete
-          end
-        %>
-        <%= check_box_tag :teste, 'valuee', task.completed?, class: task_class, data: { remote: true, method: :post, url: task_url, url_complete: complete_task_path(task), url_uncomplete: uncomplete_task_path(task) } %>
-      </td>
-      <td class="col-md-8 name"><%= task.name %></td>
-      <td class="col-md-1 text-center"><%= link_to 'Edit', edit_task_path(task), id: 'edit' %></td>
-      <td class="col-md-1 text-center"><%= link_to 'Remove', task_path(task), id: 'remove', data: { confirm: 'Are your sure?' }, method: :delete, remote: true %></td>
-    </tr>
+  <% @groups.each do |group| %>
+    <%= group.name %><br />
+    <table id="tasks-list" class="table table-condensed table-striped table-hover">
+      <% group.tasks.each do |task| %>
+          <tr class="<%= 'completed' if task.completed? %>" id="task_<%= task.id %>">
+            <td class="col-md-1">
+              <%
+                if task.completed?
+                  task_url = uncomplete_task_path(task)
+                  task_class = :uncomplete
+                else
+                  task_url = complete_task_path(task)
+                  task_class = :complete
+                end
+              %>
+              <%= check_box_tag :teste, 'valuee', task.completed?, class: task_class, data: { remote: true, method: :post, url: task_url, url_complete: complete_task_path(task), url_uncomplete: uncomplete_task_path(task) } %>
+            </td>
+            <td class="col-md-8 name"><%= task.name %></td>
+            <td class="col-md-1 text-center"><%= link_to 'Edit', edit_task_path(task), id: 'edit' %></td>
+            <td class="col-md-1 text-center"><%= link_to 'Remove', task_path(task), id: 'remove', data: { confirm: 'Are your sure?' }, method: :delete, remote: true %></td>
+          </tr>
+      <% end %>
+    </table>
   <% end %>
-</table>
 
-<%= will_paginate @tasks %>
 
 <% content_for :footer_javascripts do %>
   <% javascript_tag do %>
