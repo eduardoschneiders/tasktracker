@@ -12,22 +12,24 @@
   }
 
   proto._completeTask = function(){
-    $('table#tasks-list tr td a.complete').on("ajax:success", function(e, data, status, xhr){
-      self = e.target;
-      $(self).parent().parent().addClass('completed');
-      $(self).hide();
-      $(self).parent().find('.uncomplete').show();
+    $('table#tasks-list tr td').on("ajax:success", '.complete', function(e, data, status, xhr){
       this._update_flash(data.message);
+      self = e.target;
+      $(self).parent().parent().removeClass('uncompleted').addClass('completed');
+      $(self).removeClass('complete').addClass('uncomplete');
+      uncomplete_path = $(self).attr('data-url-uncomplete');
+      $(self).data('url', uncomplete_path);
     }.bind(this));
   }
 
   proto._uncompleteTask = function(){
-    $('table#tasks-list tr td a.uncomplete').on("ajax:success", function(e, data, status, xhr){
-      self = e.target;
-      $(self).parent().parent().removeClass('completed');
-      $(self).hide();
-      $(self).parent().find('.complete').show();
+    $('table#tasks-list tr td').on("ajax:success", '.uncomplete', function(e, data, status, xhr){
       this._update_flash(data.message);
+      self = e.target;
+      $(self).parent().parent().removeClass('completed').addClass('uncompleted');
+      $(self).removeClass('uncomplete').addClass('complete');
+      complete_path = $(self).attr('data-url-complete');
+      $(self).data('url', complete_path);
     }.bind(this));
   }
 
