@@ -1,7 +1,8 @@
 <% if current_user %>
   <div id="graph" style="width: 100%; height: 300px;"></div>
 <% else %>
-  We have about <%= @users_count %> users using the system and <%= @tasks_count %> tasks registered in.
+  <p>We have about <%= @users_count %> users using the system and <%= @tasks_count %> tasks registered in.</p>
+  <p>know more about the project at <%= link_to 'Github', 'https://github.com/eduardoschneiders/tasktracker/', target: '_blank' %>.</p>
 <% end %>
 
 <% content_for :footer_javascripts do %>
