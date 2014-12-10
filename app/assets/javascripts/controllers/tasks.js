@@ -1,5 +1,6 @@
 (function(taskTracker){
   taskTracker.ControlMessages = function(){
+    this.timeoutID;
     this._bindEvents();
   }
 
@@ -42,7 +43,14 @@
   }
 
   proto._update_flash = function(message){
+    window.clearTimeout(this.timeoutID);
+    $('#notice').hide();
     $('#notice').html(message);
-    $('#notice').fadeIn('fast').delay(3000).fadeOut('fast');
+    $('#notice').fadeIn('fast');
+    this.timeoutID= window.setTimeout(this._hide_message, 3000);
+  }
+
+  proto._hide_message = function(){
+    $('#notice').fadeOut('fast');
   }
 })(taskTracker);
