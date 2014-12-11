@@ -44,10 +44,10 @@
 
   proto._update_flash = function(message){
     window.clearTimeout(this.timeoutID);
-    $('#notice').hide();
+    $('#notice').fadeOut('fast');
     $('#notice').html(message);
     $('#notice').fadeIn('fast');
-    this.timeoutID= window.setTimeout(this._hide_message, 3000);
+    this.timeoutID = window.setTimeout(this._hide_message, 3000);
   }
 
   proto._hide_message = function(){
