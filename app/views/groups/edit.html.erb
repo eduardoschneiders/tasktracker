@@ -1,0 +1,6 @@
+<h2>Edit group</h2>
+<%= form_for @group do |f| %>
+  <%= f.label :name, 'Name:' %>
+  <%= f.text_field :name %><br />
+  <%= f.submit %>
+<% end %>

@@ -1,0 +1,20 @@
+<h2 class="title">
+  Groups
+  <%= link_to 'New Group', new_group_path, class: 'btn btn-primary right' %>
+</h2>
+
+<table id="groups-list" class="table table-condensed table-striped table-hover">
+  <% @groups.each do |group| %>
+    <tr id="task_<%= group.id%>">
+      <td class="col-md-9 name"><%= group.name %></td>
+      <td class="col-md-1 text-center"><%= link_to 'Edit', edit_group_path(group), id: 'edit' %></td>
+      <td class="col-md-1 text-center"><%= link_to 'Remove', group_path(group), id: 'remove', data: { confirm: 'Are your sure?' }, method: :delete, remote: true %></td>
+    </tr>
+  <% end %>
+</table>
+
+<% content_for :footer_javascripts do %>
+  <% javascript_tag do %>
+    new taskTracker.ControlMessagesGroup();
+  <% end %>
+<% end %>

@@ -11,6 +11,7 @@ ObjectivesTracker::Application.routes.draw do
    post 'users'         => "users#create"
 
    resources :session, only: [:new, :create, :destroy]
+   resources :groups
    resources :tasks
    resources :users
    post 'task/:id/complete' => "tasks#complete", as: :complete_task
