@@ -63,6 +63,11 @@ class TasksController < ApplicationController
     end
   end
 
+
+  def deleted
+    @groups_tasks = Group.all.includes(:tasks).where(tasks: { deleted: true })
+  end
+
   private
 
   def task_params

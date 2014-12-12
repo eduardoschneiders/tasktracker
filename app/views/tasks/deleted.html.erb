@@ -1,0 +1,16 @@
+<h2 class="title">
+  Deleted tasks
+</h2>
+
+  <% @groups_tasks.each do |group| %>
+    <%= group.name %><br />
+    <table id="tasks-list" class="table table-condensed table-striped table-hover">
+      <% group.tasks.each do |task| %>
+          <tr class="<%= 'completed' if task.completed? %>" id="task_<%= task.id %>">
+            <td class="col-md-8 name"><%= task.name %></td>
+            <td class="col-md-1 text-center"><%= link_to 'Restore', task_path(task), id: 'restore', data: { confirm: 'Are your sure?' }, method: :post, remote: true %></td>
+          </tr>
+      <% end %>
+    </table>
+  <% end %>
+

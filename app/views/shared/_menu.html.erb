@@ -15,6 +15,7 @@
         <% if current_user.present? %>
           <li class="<%= active_menu([groups_path, new_group_path]) %>"><%= link_to 'Groups', groups_path %></li>
           <li class="<%= active_menu([tasks_path, new_task_path]) %>"><%= link_to 'Tasks', tasks_path %></li>
+          <li class="<%= active_menu([deleted_tasks_path]) %>"><%= link_to 'Deleted tasks', deleted_tasks_path %></li>
         <% end %>
       </ul>
 

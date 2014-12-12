@@ -36,7 +36,7 @@ class GroupsController < ApplicationController
   private
 
   def destroy_group_tasks
-    Task.where(group: @group).each{ |task| task.update_attributes(deleted: true }
+    Task.where(group: @group).each { |task| task.update_attributes(deleted: true) }
   end
 
   def group_params
