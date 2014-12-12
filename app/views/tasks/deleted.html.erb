@@ -1,5 +1,7 @@
 <h2 class="title">
   Deleted tasks
+  <%# <%= link_to 'Permanently remove all', permanently_remove_tasks_path, class: 'btn btn-primary btn-danger right' %1> %>
+  <%= link_to 'Restore all', restore_tasks_path, class: 'btn btn-primary right', id: 'restore_all', data: { confirm: 'Are you sure?' }, method: :post, remote: true %>
 </h2>
 
 <% @groups_tasks.each do |group| %>
@@ -8,7 +10,7 @@
     <% group.tasks.each do |task| %>
         <tr id="task_<%= task.id %>">
           <td class="col-md-8 name"><%= task.name %></td>
-          <td class="col-md-1 text-center"><%= link_to 'Restore', restore_task_path(task), id: 'restore', data: { confirm: 'Are your sure?' }, method: :post, remote: true %></td>
+          <td class="col-md-1 text-center"><%= link_to 'Restore', restore_task_path(task), id: 'restore', data: { confirm: 'Are you sure?' }, method: :post, remote: true %></td>
         </tr>
     <% end %>
   </table>

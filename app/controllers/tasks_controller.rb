@@ -67,6 +67,18 @@ class TasksController < ApplicationController
     @groups_tasks = Group.all.includes(:tasks).where(tasks: { deleted: true })
   end
 
+  def restore_all
+    require 'pry'; binding.pry
+    tasks = Task.where(user: current_user, deleted: true)
+
+    require 'pry'; binding.pry
+    respond_to do |format|
+      if tasks.update_all(deleted: nil, completed: nil)
+        format.json { render json: { task: tasks, message: 'Tasks restored with success.' }, status: :ok, location: tasks }
+      end
+    end
+  end
+
   def restore
     task = Task.find(params[:id])
 
