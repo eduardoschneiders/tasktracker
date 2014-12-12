@@ -10,6 +10,7 @@
     this._completeTask();
     this._uncompleteTask();
     this._removeTask();
+    this._restoreTask();
   }
 
   proto._completeTask = function(){
@@ -36,6 +37,14 @@
 
   proto._removeTask = function(){
     $('table#tasks-list tr td a#remove').on("ajax:success", function(e, data, status, xhr){
+      self = e.target
+      $(self).parent().parent().remove();
+      this._update_flash(data.message);
+    }.bind(this));
+  }
+
+  proto._restoreTask = function(){
+    $('table#tasks-list tr td a#restore').on("ajax:success", function(e, data, status, xhr){
       self = e.target
       $(self).parent().parent().remove();
       this._update_flash(data.message);

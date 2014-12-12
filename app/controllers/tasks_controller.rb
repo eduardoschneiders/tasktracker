@@ -63,9 +63,18 @@ class TasksController < ApplicationController
     end
   end
 
-
   def deleted
     @groups_tasks = Group.all.includes(:tasks).where(tasks: { deleted: true })
+  end
+
+  def restore
+    task = Task.find(params[:id])
+
+    respond_to do |format|
+      if task.update_attributes(deleted: nil)
+        format.json { render json: { task: task, message: 'Task restored with success.' }, status: :ok, location: task }
+      end
+    end
   end
 
   private
