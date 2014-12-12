@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   def index
-    @groups = Group.all
+    @groups = Group.active.all
   end
 
   def new
@@ -27,7 +27,7 @@ class GroupsController < ApplicationController
   def destroy
     @group = Group.find(params[:id])
     respond_to do |format|
-      if destroy_group_tasks && @group.destroy
+      if destroy_group_tasks && @group.update_attributes(deleted: true)
         format.json { render json: { group: @group, message: 'Group deleted with success.' }, status: :created, location: @group }
       end
     end
@@ -36,7 +36,7 @@ class GroupsController < ApplicationController
   private
 
   def destroy_group_tasks
-    Task.where(group: @group).each{ |task| task.destroy }
+    Task.where(group: @group).each{ |task| task.update_attributes(deleted: true }
   end
 
   def group_params
