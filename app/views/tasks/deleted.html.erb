@@ -6,7 +6,7 @@
   <%= group.name %><br />
   <table id="tasks-list" class="table table-condensed table-striped table-hover">
     <% group.tasks.each do |task| %>
-        <tr class="<%= 'completed' if task.completed? %>" id="task_<%= task.id %>">
+        <tr id="task_<%= task.id %>">
           <td class="col-md-8 name"><%= task.name %></td>
           <td class="col-md-1 text-center"><%= link_to 'Restore', restore_task_path(task), id: 'restore', data: { confirm: 'Are your sure?' }, method: :post, remote: true %></td>
         </tr>

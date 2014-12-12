@@ -71,7 +71,7 @@ class TasksController < ApplicationController
     task = Task.find(params[:id])
 
     respond_to do |format|
-      if task.update_attributes(deleted: nil)
+      if task.update_attributes(deleted: nil, completed: nil)
         format.json { render json: { task: task, message: 'Task restored with success.' }, status: :ok, location: task }
       end
     end
