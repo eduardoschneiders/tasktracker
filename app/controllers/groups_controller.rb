@@ -25,15 +25,19 @@ class GroupsController < ApplicationController
   end
 
   def destroy
-    group = Group.find(params[:id])
+    @group = Group.find(params[:id])
     respond_to do |format|
-      if group.destroy
-        format.json { render json: { group: group, message: 'Group deleted with success.' }, status: :created, location: group }
+      if destroy_group_tasks && @group.destroy
+        format.json { render json: { group: @group, message: 'Group deleted with success.' }, status: :created, location: @group }
       end
     end
   end
 
   private
+
+  def destroy_group_tasks
+    Task.where(group: @group).each{ |task| task.destroy }
+  end
 
   def group_params
     params.require(:group).permit(:name)
