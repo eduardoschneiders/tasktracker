@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_filter :can_access_logged
 
   def index
-    @groups = Group.all
+    @groups = Group.active.where(user: current_user).all
   end
 
   def new
@@ -64,14 +64,12 @@ class TasksController < ApplicationController
   end
 
   def deleted
-    @groups_tasks = Group.all.includes(:tasks).where(tasks: { deleted: true })
+    @groups_tasks = Group.where(user: current_user).includes(:tasks).where(tasks: { deleted: true })
   end
 
   def restore_all
-    require 'pry'; binding.pry
     tasks = Task.where(user: current_user, deleted: true)
 
-    require 'pry'; binding.pry
     respond_to do |format|
       if tasks.update_all(deleted: nil, completed: nil)
         format.json { render json: { task: tasks, message: 'Tasks restored with success.' }, status: :ok, location: tasks }

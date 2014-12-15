@@ -6,6 +6,6 @@
 <%= form_for @task do |f| %>
   <%= f.label :name, 'Name:' %>
   <%= f.text_field :name, autofocus: true %><br />
-  <%= f.select(:group_id, options_for_select(Group.all.map { |g| [g.name, g.id] })) %>
+  <%= f.select(:group_id, options_for_select(Group.where(user: current_user).all.map { |g| [g.name, g.id] })) %>
   <%= f.submit "Create" %>
 <% end %>

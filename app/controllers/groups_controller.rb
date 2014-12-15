@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
   def index
-    @groups = Group.active.all
+    @groups = Group.active.where(user: current_user).all
   end
 
   def new
@@ -19,7 +19,7 @@ class GroupsController < ApplicationController
   end
 
   def create
-    Group.create(group_params)
+    Group.create(group_params.merge(user: current_user))
     flash[:notice] = 'Group created with success.'
     redirect_to groups_path
   end
@@ -36,7 +36,7 @@ class GroupsController < ApplicationController
   private
 
   def destroy_group_tasks
-    Task.where(group: @group).each { |task| task.update_attributes(deleted: true) }
+    Task.where(user: current_user, group: @group).each { |task| task.update_attributes(deleted: true) }
   end
 
   def group_params
