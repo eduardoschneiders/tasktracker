@@ -18,11 +18,11 @@
                   task_class = :complete
                 end
               %>
-              <%= check_box_tag :teste, 'valuee', task.completed?, class: task_class, data: { remote: true, method: :post, url: task_url, url_complete: complete_task_path(task), url_uncomplete: uncomplete_task_path(task) } %>
+            <%= check_box_tag :complete, 'value', task.completed?, class: "complete_uncomplete #{task_class}", data: { remote: true, method: :post, url: task_url, url_complete: complete_task_path(task), url_uncomplete: uncomplete_task_path(task) } %>
             </td>
             <td class="col-md-8 name"><%= task.name %></td>
-            <td class="col-md-1 text-center"><%= link_to 'Edit', edit_task_path(task), id: 'edit' %></td>
-            <td class="col-md-1 text-center"><%= link_to 'Remove', task_path(task), id: 'remove', data: { confirm: 'Are your sure?' }, method: :delete, remote: true %></td>
+            <td class="col-md-1 text-center"><%= link_to 'Edit', edit_task_path(task), id: 'edit', class: 'edit' %></td>
+            <td class="col-md-1 text-center"><%= link_to 'Remove', task_path(task), id: 'remove', class: 'remove', data: { confirm: 'Are your sure?' }, method: :delete, remote: true %></td>
           </tr>
       <% end %>
     </table>
