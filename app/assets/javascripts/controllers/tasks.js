@@ -11,6 +11,7 @@
     this._uncompleteTask();
     this._removeTask();
     this._restoreTask();
+    this._restoreAllTask();
   }
 
   proto._completeTask = function(){
@@ -48,6 +49,14 @@
       self = e.target
       $(self).parent().parent().remove();
       this._update_flash(data.message);
+    }.bind(this));
+  }
+
+  proto._restoreAllTask = function(){
+    $('a#permanently_remove_tasks').on("ajax:success", function(e, data, status, xhr){
+      this._update_flash(data.message);
+      self = e.target
+      $('table#tasks-list').remove();
     }.bind(this));
   }
 

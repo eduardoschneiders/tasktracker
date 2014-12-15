@@ -67,12 +67,12 @@ class TasksController < ApplicationController
     @groups_tasks = Group.where(user: current_user).includes(:tasks).where(tasks: { deleted: true })
   end
 
-  def restore_all
+  def permanently_destroy
     tasks = Task.where(user: current_user, deleted: true)
 
     respond_to do |format|
-      if tasks.update_all(deleted: nil, completed: nil)
-        format.json { render json: { task: tasks, message: 'Tasks restored with success.' }, status: :ok, location: tasks }
+      if tasks.destroy_all
+        format.json { render json: { task: tasks, message: 'All tasks destroied permanently with success.' }, status: :ok, location: tasks_path }
       end
     end
   end

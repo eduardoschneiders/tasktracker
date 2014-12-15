@@ -1,7 +1,13 @@
 <h2 class="title">
   Deleted tasks
-  <%# <%= link_to 'Permanently remove all', permanently_remove_tasks_path, class: 'btn btn-primary btn-danger right' %1> %>
-  <%= link_to 'Restore all', restore_tasks_path, class: 'btn btn-primary right', id: 'restore_all', data: { confirm: 'Are you sure?' }, method: :post, remote: true %>
+  <%= link_to 'Permanently remove all', 
+    permanently_remove_tasks_path, 
+    class: 'btn btn-primary btn-danger right', 
+    id: 'permanently_remove_tasks', 
+    data: { confirm: 'Are you sure?' }, 
+    method: :post, 
+    remote: true 
+  %>
 </h2>
 
 <% @groups_tasks.each do |group| %>

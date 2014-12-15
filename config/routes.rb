@@ -17,10 +17,10 @@ ObjectivesTracker::Application.routes.draw do
    resources :tasks
    resources :users
 
+   post 'tasks/destroy' => 'tasks#permanently_destroy', as: :permanently_remove_tasks
    post 'task/:id/complete' => "tasks#complete", as: :complete_task
    post 'task/:id/uncomplete' => "tasks#uncomplete", as: :uncomplete_task
    post 'task/:id/restore' => 'tasks#restore', as: :restore_task
-   post 'tasks/restore' => 'task#restore_all', as: :restore_tasks
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
