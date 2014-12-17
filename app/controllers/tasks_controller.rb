@@ -21,9 +21,12 @@ class TasksController < ApplicationController
 
   def update
     task = Task.find(params[:id])
-    task.update_attributes(task_params)
-    flash[:notice] = 'Task updated with success.'
-    redirect_to tasks_path
+    respond_to do |format|
+      if task.update_attributes(task_params)
+        format.json { render json: { task: task, message: 'Task upated with success.' }, status: :created, location: task }
+        format.html { flash[:notice] = 'Task updated with success.'; redirect_to tasks_path }
+      end
+    end
   end
 
   def destroy

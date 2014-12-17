@@ -32,7 +32,10 @@ body       { padding-top: 50px; margin-top: 30px; }
 .alert    { position: fixed; top: 20px; z-index: 1500; left: 40%; }
 
 table#tasks-list tr {
-  .edit, .remove, .complete_uncomplete { display: none;  }
-
-  &:hover { .edit, .remove, .complete_uncomplete { display: block; } }
+  .edit, .remove,
+  .complete_uncomplete  { display: none;  }
+  &:hover               { .edit, .remove, .complete_uncomplete { display: block; } }
+  td.name {
+    .form-holder { display: none; }
+  }
 }
