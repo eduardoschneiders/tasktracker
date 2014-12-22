@@ -14,19 +14,7 @@
     $('table#groups-list tr td a#remove').on("ajax:success", function(e, data, status, xhr){
       self = e.target
       $(self).parent().parent().remove();
-      this._update_flash(data.message);
+      taskTracker.update_flash(data.message);
     }.bind(this));
-  }
-
-  proto._update_flash = function(message){
-    window.clearTimeout(this.timeoutID);
-    $('#notice').fadeOut('fast');
-    $('#notice').html(message);
-    $('#notice').fadeIn('fast');
-    this.timeoutID = window.setTimeout(this._hide_message, 3000);
-  }
-
-  proto._hide_message = function(){
-    $('#notice').fadeOut('fast');
   }
 })(taskTracker);

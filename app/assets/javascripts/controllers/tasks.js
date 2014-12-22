@@ -1,4 +1,5 @@
 (function(taskTracker){
+
   taskTracker.ControlMessages = function(){
     this.timeoutID;
     this._bindEvents();
@@ -17,7 +18,7 @@
 
   proto._completeTask = function(){
     $('table#tasks-list tr td').on("ajax:success", '.complete', function(e, data, status, xhr){
-      this._update_flash(data.message);
+      taskTracker.update_flash(data.message);
       self = e.target;
       $(self).parent().parent().removeClass('uncompleted').addClass('completed');
       $(self).removeClass('complete').addClass('uncomplete');
@@ -28,7 +29,7 @@
 
   proto._uncompleteTask = function(){
     $('table#tasks-list tr td').on("ajax:success", '.uncomplete', function(e, data, status, xhr){
-      this._update_flash(data.message);
+      taskTracker.update_flash(data.message);
       self = e.target;
       $(self).parent().parent().removeClass('completed').addClass('uncompleted');
       $(self).removeClass('uncomplete').addClass('complete');
@@ -41,7 +42,7 @@
     $('table#tasks-list tr td a#remove').on("ajax:success", function(e, data, status, xhr){
       self = e.target
       $(self).parent().parent().remove();
-      this._update_flash(data.message);
+      taskTracker.update_flash(data.message);
     }.bind(this));
   }
 
@@ -49,28 +50,16 @@
     $('table#tasks-list tr td a#restore').on("ajax:success", function(e, data, status, xhr){
       self = e.target
       $(self).parent().parent().remove();
-      this._update_flash(data.message);
+      taskTracker.update_flash(data.message);
     }.bind(this));
   }
 
   proto._restoreAllTask = function(){
     $('a#permanently_remove_tasks').on("ajax:success", function(e, data, status, xhr){
-      this._update_flash(data.message);
+      taskTracker.update_flash(data.message);
       self = e.target
       $('table#tasks-list').remove();
     }.bind(this));
-  }
-
-  proto._update_flash = function(message){
-    window.clearTimeout(this.timeoutID);
-    $('#notice').fadeOut('fast');
-    $('#notice').html(message);
-    $('#notice').fadeIn('fast');
-    this.timeoutID = window.setTimeout(this._hide_message, 3000);
-  }
-
-  proto._hide_message = function(){
-    $('#notice').fadeOut('fast');
   }
 
   proto._editTask = function(){
@@ -94,7 +83,7 @@
       container.find('.text-holder').text(text).show();
       container.find('.form-holder').hide();
 
-      this._update_flash(data.message);
+      taskTracker.update_flash(data.message);
     }.bind(this));
   }
 })(taskTracker);
