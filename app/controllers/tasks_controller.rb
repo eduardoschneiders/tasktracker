@@ -67,7 +67,7 @@ class TasksController < ApplicationController
   end
 
   def deleted
-    @groups_tasks = Group.where(user: current_user).includes(:tasks).where(tasks: { deleted: true })
+    @groups_tasks = Group.joins(:tasks).includes(:tasks).where(tasks: { deleted: true, user: current_user })
   end
 
   def permanently_destroy
