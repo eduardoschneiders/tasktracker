@@ -10,10 +10,10 @@
     <% javascript_tag do %>
       var graph = Morris.Line({
         element: 'graph',
-        data: <%= @processed_tasks.to_json.to_s.html_safe %>,
+        data: <%= @tasks.to_json.to_s.html_safe %>,
         xkey: 'day',
-        ykeys: ['done', 'todo'],
-        labels: ['Done', 'To do'],
+        ykeys: ['completed', 'todo'],
+        labels: ['Completed', 'To do'],
         parseTime: false,
         hideHover: true
       });
