@@ -13,4 +13,8 @@ taskTracker.hide_message = function(){
 
 $(document).ready(function (){
   $('#notice').delay(3000).fadeOut('fast');
+
+  $('#tasks-tab').tab();
 })
+
+

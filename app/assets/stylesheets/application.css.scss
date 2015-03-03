@@ -14,28 +14,21 @@
  */
 @import 'bootstrap';
 
-body       { padding-top: 50px; margin-top: 30px; }
-
+body        { background: #ECF0F1; padding-top: 50px; margin-top: 30px; }
 .left       { float: left; }
 .right      { float: right; }
 .margin-top     { margin-top: 30px; }
 .margin-right   { margin-right: 30px; }
 .margin-bottom  { margin-bottom: 30px; }
 .margin-left    { margin-left: 30px; }
+.clear  { clear: both; }
+ul, li  { list-style: none; margin: 0; padding: 0; }
 
-.title     { margin-bottom: 20px; margin-top: 20px; }
+
+// .title     { margin-bottom: 20px; margin-top: 20px; }
 
 .completed {
   td.name { opacity: 0.5; text-decoration: line-through; }
 }
 
 .alert    { position: fixed; top: 20px; z-index: 1500; left: 40%; }
-
-table#tasks-list tr {
-  .edit, .remove,
-  .complete_uncomplete  { display: none;  }
-  &:hover               { .edit, .remove, .complete_uncomplete { display: block; } }
-  td.name {
-    .form-holder { display: none; }
-  }
-}

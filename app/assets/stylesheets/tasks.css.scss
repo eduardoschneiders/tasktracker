@@ -1,0 +1,26 @@
+.task-group {
+  background: #FFF;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding: 20px;
+}
+
+.task-group h5.title {
+  margin-top: 0;
+  margin-bottom: 40px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.task-group .tab-content {
+  margin-top: 15px;
+}
+
+table#tasks-list tr {
+  .edit, .remove,
+  .complete_uncomplete  { display: none;  }
+  &:hover               { .edit, .remove, .complete_uncomplete { display: block; } }
+  td.name {
+    .form-holder { display: none; }
+  }
+}

@@ -3,6 +3,133 @@
   <%= link_to 'New Task', new_task_path, class: 'btn btn-primary right' %>
 </h2>
 
+<div class="clear"></div>
+
+<%# <div class="row"> %>
+<%#   <div class="col-sm-4"> %>
+<%#     <div class="task-group"> %>
+<%#       <h5 class="title">Task Tracker 1</h5> %>
+
+<%#       <ul id="tasks-tab" class="tasks nav nav-tabs"> %>
+<%#         <li role="presentation" class="active"><a href="#group_task_1_todo" data-toggle="tab">To do</a></li> %>
+<%#         <li role="presentation"><a href="#group_task_1_done" data-toggle="tab">Done</a></li> %>
+<%#       </ul> %>
+
+<%#       <div id="tab-content" class="tab-content"> %>
+<%#         <div class="tab-pane active" id="group_task_1_todo"> %>
+<%#           <ul> %>
+<%#             <li>task todo 1</li> %>
+<%#             <li>task todo 2</li> %>
+<%#             <li>task todo 3</li> %>
+<%#             <li>task todo 4</li> %>
+<%#             <li>task todo 5</li> %>
+<%#           </ul> %>
+<%#         </div> %>
+<%#         <div class="tab-pane" id="group_task_1_done"> %>
+<%#           <ul> %>
+<%#             <li>task done 1</li> %>
+<%#             <li>task done 2</li> %>
+<%#             <li>task done 3</li> %>
+<%#             <li>task done 4</li> %>
+<%#             <li>task done 5</li> %>
+<%#           </ul> %>
+<%#         </div> %>
+<%#       </div> %>
+<%#     </div> %>
+<%#   </div> %>
+
+<%#   <div class="col-sm-4"> %>
+<%#     <div class="task-group"> %>
+<%#       <h5 class="title">Task Tracker 1</h5> %>
+
+<%#       <ul id="tasks-tab" class="tasks nav nav-tabs"> %>
+<%#         <li role="presentation" class="active"><a href="#group_task_2_todo" data-toggle="tab">To do</a></li> %>
+<%#         <li role="presentation"><a href="#group_task_2_done" data-toggle="tab">Done</a></li> %>
+<%#       </ul> %>
+
+<%#       <div id="tab-content" class="tab-content"> %>
+<%#         <div class="tab-pane active" id="group_task_2_todo"> %>
+<%#           <ul> %>
+<%#             <li>task todo 1</li> %>
+<%#             <li>task todo 2</li> %>
+<%#             <li>task todo 3</li> %>
+<%#             <li>task todo 4</li> %>
+<%#             <li>task todo 5</li> %>
+<%#           </ul> %>
+<%#         </div> %>
+<%#         <div class="tab-pane" id="group_task_2_done"> %>
+<%#           <ul> %>
+<%#             <li>task done 1</li> %>
+<%#             <li>task done 2</li> %>
+<%#             <li>task done 3</li> %>
+<%#             <li>task done 4</li> %>
+<%#             <li>task done 5</li> %>
+<%#           </ul> %>
+<%#         </div> %>
+<%#       </div> %>
+<%#     </div> %>
+<%#   </div> %>
+
+<%#   <div class="col-sm-4"> %>
+<%#     <div class="task-group"> %>
+<%#       <h5 class="title">Task Tracker 3</h5> %>
+
+<%#       <ul id="tasks-tab" class="tasks nav nav-tabs"> %>
+<%#         <li role="presentation" class="active"><a href="#group_task_3_todo" data-toggle="tab">To do</a></li> %>
+<%#         <li role="presentation"><a href="#group_task_3_done" data-toggle="tab">Done</a></li> %>
+<%#       </ul> %>
+
+<%#       <div id="tab-content" class="tab-content"> %>
+<%#         <div class="tab-pane active" id="group_task_3_todo"> %>
+<%#           <ul> %>
+<%#             <li>task todo 1</li> %>
+<%#             <li>task todo 2</li> %>
+<%#             <li>task todo 3</li> %>
+<%#             <li>task todo 4</li> %>
+<%#             <li>task todo 5</li> %>
+<%#           </ul> %>
+<%#         </div> %>
+<%#         <div class="tab-pane" id="group_task_3_done"> %>
+<%#           <ul> %>
+<%#             <li>task done 1</li> %>
+<%#             <li>task done 2</li> %>
+<%#             <li>task done 3</li> %>
+<%#             <li>task done 4</li> %>
+<%#             <li>task done 5</li> %>
+<%#           </ul> %>
+<%#         </div> %>
+<%#       </div> %>
+<%#     </div> %>
+<%#   </div> %>
+<%# </div> %>
+
+
+
+
+
+
+
+<%# http://tableless.com.br/implementacao-psd-para-html-sass/ %>
+<br /><br /><br /><br /><br /><br />
+
+
+
+
+
+
+
+<div class="row">
+  <% @groups.each do |group| %>
+    <%= render partial: 'group_tasks', locals: { group: group } %>
+  <% end %>
+</div>
+
+
+
+
+
+<br /><br /><br /><br /><br /><br />
+
   <% @groups.each do |group| %>
     <%= group.name %><br />
     <table id="tasks-list" class="table table-condensed table-striped table-hover">
