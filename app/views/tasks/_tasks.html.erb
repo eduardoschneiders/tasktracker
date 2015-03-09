@@ -1,8 +1,24 @@
-<table class="table table-condensed table-striped table-hover" >
+<table class="table table-condensed table-striped table-hover tasks-list">
   <% tasks.each do |task| %>
     <tr>
-      <td>
+      <td class="actions">
+        <%
+          if task.completed?
+            task_url    = uncomplete_task_path(task)
+            task_class  = 'uncomplete'
+          else
+            task_url    = complete_task_path(task)
+            task_class  = 'complete'
+          end
+        %>
+
+        <%= check_box_tag :complete, 'value', task.completed?, class: "complete_uncomplete #{task_class}", data: { remote: true, method: :post, url: task_url, url_complete: complete_task_path(task), url_uncomplete: uncomplete_task_path(task) } %>
+      </td>
+      <td class="name">
         <%= task.name %></li>
+      </td>
+      <td class="actions">
+        <%= link_to 'X', task_path(task), class: 'remove', data: { confirm: 'Are your sure?' }, method: :delete, remote: true %>
       </td>
     </tr>
   <% end %>

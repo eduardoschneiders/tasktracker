@@ -1,6 +1,7 @@
 (function(taskTracker){
 
   taskTracker.ControlMessages = function(){
+    this.actions = $('table.tasks-list tr td.actions');
     this.timeoutID;
     this._bindEvents();
   }
@@ -17,13 +18,13 @@
   }
 
   proto._completeTask = function(){
-    $('table#tasks-list tr td').on("ajax:success", '.complete', function(e, data, status, xhr){
+    this.actions.find('.complete').on("ajax:success", function(e, data, status, xhr){
       taskTracker.update_flash(data.message);
       self = e.target;
-      $(self).parent().parent().removeClass('uncompleted').addClass('completed');
-      $(self).removeClass('complete').addClass('uncomplete');
       uncomplete_path = $(self).attr('data-url-uncomplete');
       $(self).data('url', uncomplete_path);
+      done_tab = $(self).parents('.todo_tasks').next().find('table');
+      $(self).parents('tr').appendTo(done_tab);
     }.bind(this));
   }
 
@@ -39,7 +40,7 @@
   }
 
   proto._removeTask = function(){
-    $('table#tasks-list tr td a#remove').on("ajax:success", function(e, data, status, xhr){
+    this.actions.find('a.remove').on("ajax:success", function(e, data, status, xhr){
       self = e.target
       $(self).parent().parent().remove();
       taskTracker.update_flash(data.message);

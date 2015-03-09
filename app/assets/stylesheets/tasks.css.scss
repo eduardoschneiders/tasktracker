@@ -16,6 +16,14 @@
   margin-top: 15px;
 }
 
+.task-group tr {
+  .edit, .remove  { opacity: 0; }
+  &:hover         { .edit, .remove { opacity: 1; } }
+
+  td.actions { width: 25px; text-align: center; }
+}
+
+
 table#tasks-list tr {
   .edit, .remove,
   .complete_uncomplete  { display: none;  }
