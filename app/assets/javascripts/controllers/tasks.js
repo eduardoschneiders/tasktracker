@@ -18,24 +18,27 @@
   }
 
   proto._completeTask = function(){
-    this.actions.find('.complete').on("ajax:success", function(e, data, status, xhr){
+    this.actions.on('ajax:success', '.complete', function(e, data, status, xhr){
       taskTracker.update_flash(data.message);
       self = e.target;
       uncomplete_path = $(self).attr('data-url-uncomplete');
       $(self).data('url', uncomplete_path);
+      $(self).attr('class', 'uncomplete');
+      $(self).removeClass('complete').addClass('uncomplete');
       done_tab = $(self).parents('.todo_tasks').next().find('table');
       $(self).parents('tr').appendTo(done_tab);
     }.bind(this));
   }
 
   proto._uncompleteTask = function(){
-    $('table#tasks-list tr td').on("ajax:success", '.uncomplete', function(e, data, status, xhr){
+    this.actions.on('ajax:success', '.uncomplete', function(e, data, status, xhr){
       taskTracker.update_flash(data.message);
       self = e.target;
-      $(self).parent().parent().removeClass('completed').addClass('uncompleted');
-      $(self).removeClass('uncomplete').addClass('complete');
       complete_path = $(self).attr('data-url-complete');
       $(self).data('url', complete_path);
+      $(self).removeClass('uncomplete').addClass('complete');
+      todo_tab = $(self).parents('.done_tasks').prev().find('table');
+      $(self).parents('tr').appendTo(todo_tab);
     }.bind(this));
   }
 
