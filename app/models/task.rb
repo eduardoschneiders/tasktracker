@@ -2,7 +2,11 @@ class Task < ActiveRecord::Base
   belongs_to :user
   belongs_to :group
 
-  scope :active, -> { where(deleted: nil) }
-  scope :uncompleted, -> { where(deleted: nil, completed: false) }
-  scope :completed, -> { where(deleted: nil, completed: true) }
+  scope :active, -> { where(deleted: false) }
+  scope :uncompleted, -> { where(deleted: false, completed_at: nil) }
+  scope :completed, -> { where(deleted: false).where.not(completed_at: nil) }
+
+  def completed?
+    completed_at != nil
+  end
 end

@@ -44,7 +44,6 @@ class TasksController < ApplicationController
 
   def complete
     task              = current_user.tasks.find(params[:id])
-    task.completed    = true
     task.completed_at = Time.now
 
     respond_to do |format|
@@ -56,7 +55,6 @@ class TasksController < ApplicationController
 
   def uncomplete
     task              = current_user.tasks.find(params[:id])
-    task.completed    = false
     task.completed_at = nil
 
     respond_to do |format|
@@ -84,7 +82,7 @@ class TasksController < ApplicationController
     task = Task.find(params[:id])
 
     respond_to do |format|
-      if task.update_attributes(deleted: nil, completed: nil)
+      if task.update_attributes(deleted: false, completed_at: nil)
         format.json { render json: { task: task, message: 'Task restored with success.' }, status: :ok, location: task }
       end
     end
@@ -93,6 +91,6 @@ class TasksController < ApplicationController
   private
 
   def task_params
-    params.require('task').permit(:name, :completed, :group_id)
+    params.require('task').permit(:name, :group_id)
   end
 end

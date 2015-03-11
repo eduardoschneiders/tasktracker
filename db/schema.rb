@@ -11,11 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141215204607) do
+ActiveRecord::Schema.define(version: 20150311202230) do
 
   create_table "groups", force: true do |t|
     t.string  "name"
-    t.boolean "deleted"
+    t.boolean "deleted", default: false
     t.integer "user_id"
   end
 
@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 20141215204607) do
     t.string   "name"
     t.integer  "user_id"
     t.boolean  "completed"
-    t.boolean  "deleted"
+    t.boolean  "deleted",      default: false
     t.datetime "completed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
