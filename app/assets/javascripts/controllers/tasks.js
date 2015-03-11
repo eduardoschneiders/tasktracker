@@ -1,7 +1,8 @@
 (function(taskTracker){
 
   taskTracker.ControlMessages = function(){
-    this.actions = $('table.tasks-list tr td.actions');
+    this.actions_container = $('table.tasks-list tr td.actions');
+    this.name_container = $('table.tasks-list tr td.name');
     this.timeoutID;
     this._bindEvents();
   }
@@ -18,7 +19,7 @@
   }
 
   proto._completeTask = function(){
-    this.actions.on('ajax:success', '.complete', function(e, data, status, xhr){
+    this.actions_container.on('ajax:success', '.complete', function(e, data, status, xhr){
       taskTracker.update_flash(data.message);
       self = e.target;
       uncomplete_path = $(self).attr('data-url-uncomplete');
@@ -31,7 +32,7 @@
   }
 
   proto._uncompleteTask = function(){
-    this.actions.on('ajax:success', '.uncomplete', function(e, data, status, xhr){
+    this.actions_container.on('ajax:success', '.uncomplete', function(e, data, status, xhr){
       taskTracker.update_flash(data.message);
       self = e.target;
       complete_path = $(self).attr('data-url-complete');
@@ -43,9 +44,34 @@
   }
 
   proto._removeTask = function(){
-    this.actions.find('a.remove').on("ajax:success", function(e, data, status, xhr){
+    this.actions_container.find('a.remove').on("ajax:success", function(e, data, status, xhr){
       self = e.target
       $(self).parent().parent().remove();
+      taskTracker.update_flash(data.message);
+    }.bind(this));
+  }
+
+  proto._editTask = function(){
+    this.name_container.on("click", function(){
+      $(this).find('.text-holder').hide();
+      $(this).find('.form-holder').show();
+      $(this).find('.form-holder').find('input').focus();
+    });
+
+    this.name_container.find('.form-holder input').blur(function(){
+      var container = $(this).parents('td.name');
+
+      container.find('.text-holder').show();
+      container.find('.form-holder').hide();
+    });
+
+    this.name_container.on("ajax:success", function(e, data, status, xhr){
+      container = $(e.target).parents('td.name');
+      var text = container.find('.form-holder input:text').val();
+
+      container.find('.text-holder').text(text).show();
+      container.find('.form-holder').hide();
+
       taskTracker.update_flash(data.message);
     }.bind(this));
   }
@@ -63,31 +89,6 @@
       taskTracker.update_flash(data.message);
       self = e.target
       $('table#tasks-list').remove();
-    }.bind(this));
-  }
-
-  proto._editTask = function(){
-    $('table#tasks-list tr td.name').on("click", function(){
-      $(this).find('.text-holder').hide();
-      $(this).find('.form-holder').show();
-      $(this).find('.form-holder').find('input').focus();
-    });
-
-    $('table#tasks-list tr td.name .form-holder input').blur(function(){
-      var container = $(this).parent().parent().parent();
-
-      container.find('.text-holder').show();
-      container.find('.form-holder').hide();
-    });
-
-    $('table#tasks-list tr td.name').on("ajax:success", function(e, data, status, xhr){
-      container = $(e.target).parent().parent();
-      var text = container.find('.form-holder input:text').val();
-
-      container.find('.text-holder').text(text).show();
-      container.find('.form-holder').hide();
-
-      taskTracker.update_flash(data.message);
     }.bind(this));
   }
 })(taskTracker);
