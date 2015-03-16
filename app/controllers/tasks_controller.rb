@@ -10,9 +10,12 @@ class TasksController < ApplicationController
   end
 
   def create
-    Task.create(task_params.merge(user: current_user))
-    flash[:notice] = 'Task created with success.'
-    redirect_to tasks_path
+    task = Task.create(task_params.merge(user: current_user))
+
+    respond_to do |format|
+      format.json { render json: { task: task, message: 'Task created with success.' }, status: :created, location: task }
+      format.html { flash[:notice] = 'Task created with success.'; redirect_to tasks_path }
+    end
   end
 
   def edit

@@ -1,0 +1,16 @@
+<table class="table table-condensed table-striped table-hover tasks-list">
+  <tr>
+    <td>
+    </td>
+    <td class="name">
+      <div class="form-holder">
+        <%= form_for Task.new, remote: true do |f| %>
+          <%= f.text_field :name %>
+          <%= f.hidden_field(:group_id, value: group_id)%>
+        <% end %>
+      </div>
+    </td>
+    <td>
+    </td>
+  </tr>
+</table>

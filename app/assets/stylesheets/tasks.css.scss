@@ -16,17 +16,26 @@
   margin-top: 15px;
 }
 
-.task-group tr {
-  .edit, .remove  { opacity: 0; }
-  &:hover         { .edit, .remove { opacity: 1; } }
+.task-group {
+  .tasks-list tr {
+    .edit, .remove  { opacity: 0; }
+    &:hover         { .edit, .remove { opacity: 1; } }
 
-  td.actions { width: 25px; text-align: center; }
+    td {
+      &.actions { width: 25px; text-align: center; }
 
-  td.name {
-    .form-holder { display: none; }
+      &.name {
+        .form-holder { display: none; }
+      }
+    }
+  }
+
+  .new_task .tasks-list {
+    td.name {
+      .form-holder { display: block; }
+    }
   }
 }
-
 
 table#tasks-list tr {
   .edit, .remove,
