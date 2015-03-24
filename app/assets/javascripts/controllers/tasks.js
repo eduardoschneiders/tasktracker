@@ -2,7 +2,9 @@
 
   taskTracker.ControlMessages = function(){
     this.actions_container = $('table.tasks-list tr td.actions');
-    this.name_container = $('table.tasks-list tr td.name');
+    this.new_name_container = $('.new_task table.tasks-list tr td.name');
+    this.name_container = $('table.tasks-list tr td.name').not(this.new_name_container);
+    this.todo_tasks_container = $('.todo_tasks table.tasks-list');
     this.timeoutID;
     this._bindEvents();
   }
@@ -16,10 +18,11 @@
     this._restoreTask();
     this._restoreAllTask();
     this._editTask();
+    this._newTask();
   }
 
   proto._completeTask = function(){
-    this.actions_container.on('ajax:success', '.complete', function(e, data, status, xhr){
+    $('table.tasks-list').on('ajax:success', 'tr td.actions .complete', function(e, data, status, xhr){
       taskTracker.update_flash(data.message);
       self = e.target;
       uncomplete_path = $(self).attr('data-url-uncomplete');
@@ -32,7 +35,7 @@
   }
 
   proto._uncompleteTask = function(){
-    this.actions_container.on('ajax:success', '.uncomplete', function(e, data, status, xhr){
+    $('table.tasks-list').on('ajax:success', 'tr td.actions .uncomplete', function(e, data, status, xhr){
       taskTracker.update_flash(data.message);
       self = e.target;
       complete_path = $(self).attr('data-url-complete');
@@ -44,7 +47,7 @@
   }
 
   proto._removeTask = function(){
-    this.actions_container.find('a.remove').on("ajax:success", function(e, data, status, xhr){
+    $('table.tasks-list').on('ajax:success', 'tr td.actions .remove', function(e, data, status, xhr){
       self = e.target
       $(self).parent().parent().remove();
       taskTracker.update_flash(data.message);
@@ -52,20 +55,20 @@
   }
 
   proto._editTask = function(){
-    this.name_container.on("click", function(){
+    $('table.tasks-list').on('click', 'tr td.name', function(){
       $(this).find('.text-holder').hide();
       $(this).find('.form-holder').show();
       $(this).find('.form-holder').find('input').focus();
     });
 
-    this.name_container.find('.form-holder input').blur(function(){
+    $('table.tasks-list').on('blur', 'tr td.name .form-holder input', function(){
       var container = $(this).parents('td.name');
 
       container.find('.text-holder').show();
       container.find('.form-holder').hide();
     });
 
-    this.name_container.on("ajax:success", function(e, data, status, xhr){
+    $('table.tasks-list').on('ajax:success', 'tr td.name', function(e, data, status, xhr){
       container = $(e.target).parents('td.name');
       var text = container.find('.form-holder input:text').val();
 
@@ -74,6 +77,17 @@
 
       taskTracker.update_flash(data.message);
     }.bind(this));
+  }
+
+  proto._newTask = function(){
+    this.new_name_container.on("ajax:success", function(e, data, status, xhr){
+      var todo_tasks_container = $(this).parents('.new_task').prev().prev().find('table');
+      $.get('tasks/' + data.task.id + '/html', function(data){
+        todo_tasks_container.append(data);
+      });
+
+      taskTracker.update_flash(data.message);
+    });
   }
 
   proto._restoreTask = function(){

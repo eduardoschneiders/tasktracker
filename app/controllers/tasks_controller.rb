@@ -18,6 +18,11 @@ class TasksController < ApplicationController
     end
   end
 
+  def html
+    task = Task.find(params[:id])
+    render partial: 'task', locals: { task: task }
+  end
+
   def edit
     @task = Task.find(params[:id])
   end
