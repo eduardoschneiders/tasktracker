@@ -3,7 +3,7 @@
     <td>
     </td>
     <td class="name">
-      <div class="form-holder">
+      <div class="new_form-holder">
         <%= form_for Task.new, remote: true do |f| %>
           <%= f.text_field :name %>
           <%= f.hidden_field(:group_id, value: group_id)%>
