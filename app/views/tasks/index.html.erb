@@ -9,6 +9,8 @@
   <% @groups.each do |group| %>
     <%= render partial: 'group_tasks', locals: { group: group } %>
   <% end %>
+
+  <%= render partial: 'new_group_tasks' %>
 </div>
 
 <% content_for :footer_javascripts do %>

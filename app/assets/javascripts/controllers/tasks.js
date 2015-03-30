@@ -20,6 +20,7 @@
     this._editTask();
     this._newTask();
     this._editGroup();
+    this._newGroup();
   }
 
   proto._completeTask = function(){
@@ -120,7 +121,7 @@
       container.find('.form-holder').hide();
     });
 
-    $('.task-group').on('ajax:success', '.group-name', function(e, data, status, xhr){
+    $('.task-group').not('.new').on('ajax:success', '.group-name', function(e, data, status, xhr){
       container = $(e.target).parents('.group-name');
       var text = container.find('.form-holder input:text').val();
 
@@ -129,5 +130,17 @@
 
       taskTracker.update_flash(data.message);
     }.bind(this));
+  }
+
+  proto._newGroup = function(){
+    $('.task-group.new').on('ajax:success', function(e, data, status, xhr){
+      var group_container = $(this).parent();
+
+      $.get('groups/' + data.group.id + '/html', function(data){
+        $(data).insertBefore(group_container);
+      });
+
+      taskTracker.update_flash(data.message);
+    });
   }
 })(taskTracker);

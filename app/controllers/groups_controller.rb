@@ -23,9 +23,12 @@ class GroupsController < ApplicationController
   end
 
   def create
-    Group.create(group_params.merge(user: current_user))
-    flash[:notice] = 'Group created with success.'
-    redirect_to groups_path
+    group = Group.create(group_params.merge(user: current_user))
+
+    respond_to do |format|
+      format.json { render json: { group: group, message: 'Group created with success.' }, status: :created, location: group }
+      format.html { flash[:notice] = 'Group created with success.'; redirect_to groups_path }
+    end
   end
 
   def destroy
@@ -35,6 +38,11 @@ class GroupsController < ApplicationController
         format.json { render json: { group: @group, message: 'Group deleted with success.' }, status: :created, location: @group }
       end
     end
+  end
+
+  def html
+    group = Group.find(params[:id])
+    render partial: 'group', locals: { group: group }
   end
 
   private
