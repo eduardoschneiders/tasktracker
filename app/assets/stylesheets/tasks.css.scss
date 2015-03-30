@@ -23,6 +23,14 @@
     }
   }
 
+  &.new {
+    .group-name {
+      .form-holder {
+        display: block;
+      }
+    }
+  }
+
   .tasks-list tr {
     .edit, .remove  { opacity: 0; }
     &:hover         { .edit, .remove { opacity: 1; } }

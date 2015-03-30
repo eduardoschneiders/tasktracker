@@ -114,7 +114,7 @@
       $(this).find('.form-holder').find('input').focus();
     });
 
-    $('.task-group').on('blur', '.group-name .form-holder input', function(){
+    $('.task-group').not('.new').on('blur', '.group-name .form-holder input', function(){
       var container = $(this).parents('.group-name');
       container.find('.text-holder').show();
       container.find('.form-holder').hide();
@@ -130,5 +130,4 @@
       taskTracker.update_flash(data.message);
     }.bind(this));
   }
-
 })(taskTracker);
