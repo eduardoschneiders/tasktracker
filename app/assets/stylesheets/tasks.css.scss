@@ -5,7 +5,7 @@
   padding: 20px;
 }
 
-.task-group h5.title {
+.task-group h5.group-name {
   margin-top: 0;
   margin-bottom: 40px;
   font-weight: bold;
@@ -17,6 +17,12 @@
 }
 
 .task-group {
+  .group-name {
+    .form-holder {
+      display: none;
+    }
+  }
+
   .tasks-list tr {
     .edit, .remove  { opacity: 0; }
     &:hover         { .edit, .remove { opacity: 1; } }

@@ -1,6 +1,15 @@
 <div class="col-sm-4">
   <div class="task-group">
-    <h5 class="title"><%= group.name %></h5>
+    <h5 class="group-name">
+      <div class="text-holder">
+        <%= group.name %>
+      </div>
+      <div class="form-holder">
+        <%= form_for group, remote: true do |f| %>
+          <%= f.text_field :name %>
+        <% end %>
+      </div>
+    </h5>
 
     <ul id="tasks-tab" class="tasks nav nav-tabs">
       <li role="presentation" class="active"><a href="<%= "#group_task_#{group.id}_todo" %>" data-toggle="tab">To do</a></li>

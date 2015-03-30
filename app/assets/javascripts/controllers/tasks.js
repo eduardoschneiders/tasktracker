@@ -19,6 +19,7 @@
     this._restoreAllTask();
     this._editTask();
     this._newTask();
+    this._editGroup();
   }
 
   proto._completeTask = function(){
@@ -105,4 +106,29 @@
       $('table#tasks-list').remove();
     }.bind(this));
   }
+
+  proto._editGroup = function(){
+    $('.task-group').on('click', '.group-name', function(){
+      $(this).find('.text-holder').hide();
+      $(this).find('.form-holder').show();
+      $(this).find('.form-holder').find('input').focus();
+    });
+
+    $('.task-group').on('blur', '.group-name .form-holder input', function(){
+      var container = $(this).parents('.group-name');
+      container.find('.text-holder').show();
+      container.find('.form-holder').hide();
+    });
+
+    $('.task-group').on('ajax:success', '.group-name', function(e, data, status, xhr){
+      container = $(e.target).parents('.group-name');
+      var text = container.find('.form-holder input:text').val();
+
+      container.find('.text-holder').text(text).show();
+      container.find('.form-holder').hide();
+
+      taskTracker.update_flash(data.message);
+    }.bind(this));
+  }
+
 })(taskTracker);

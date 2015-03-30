@@ -29,6 +29,7 @@ class TasksController < ApplicationController
 
   def update
     task = Task.find(params[:id])
+
     respond_to do |format|
       if task.update_attributes(task_params)
         format.json { render json: { task: task, message: 'Task upated with success.' }, status: :created, location: task }

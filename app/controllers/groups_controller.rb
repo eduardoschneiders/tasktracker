@@ -13,9 +13,13 @@ class GroupsController < ApplicationController
 
   def update
     group = Group.find(params[:id])
-    group.update_attributes(group_params)
-    flash[:notice] = 'Group updated with success.'
-    redirect_to groups_path
+
+    respond_to do |format|
+      if group.update_attributes(group_params)
+        format.json { render json: { group: group, message: 'Group upated with success.' }, status: :created, location: group }
+        format.html { flash[:notice] = 'Group updated with success.'; redirect_to groups_path }
+      end
+    end
   end
 
   def create
