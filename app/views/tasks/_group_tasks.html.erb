@@ -11,6 +11,8 @@
       </div>
     </h5>
 
+    <%= link_to 'X', group_path(group), class: 'remove-group', data: { confirm: 'Are your sure?' }, method: :delete, remote: true %>
+
     <ul id="tasks-tab" class="tasks nav nav-tabs">
       <li role="presentation" class="active"><a href="<%= "#group_task_#{group.id}_todo" %>" data-toggle="tab">To do</a></li>
       <li role="presentation"><a href="<%= "#group_task_#{group.id}_done" %>" data-toggle="tab">Done</a></li>

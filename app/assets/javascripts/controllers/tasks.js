@@ -21,6 +21,7 @@
     this._newTask();
     this._editGroup();
     this._newGroup();
+    this._removeGroup();
   }
 
   proto._completeTask = function(){
@@ -141,6 +142,13 @@
         $(data).insertBefore(group_container);
       });
 
+      taskTracker.update_flash(data.message);
+    });
+  }
+
+  proto._removeGroup = function(){
+    $('.row').on('ajax:success', '.task-group .remove-group', function(e, data, status, xhr){
+      $(this).parents('.task-group').parent().remove();
       taskTracker.update_flash(data.message);
     });
   }
