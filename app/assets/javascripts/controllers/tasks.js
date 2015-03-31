@@ -85,6 +85,7 @@
   proto._newTask = function(){
     $('.row').on("ajax:success", '.new_task table.tasks-list tr td.name', function(e, data, status, xhr){
       var todo_tasks_container = $(this).parents('.new_task').prev().prev().find('table');
+      $(this).find('input[name="task[name]"]').val('');
 
       $.get('tasks/' + data.task.id + '/html', function(data){
         todo_tasks_container.append(data);
@@ -111,7 +112,7 @@
   }
 
   proto._editGroup = function(){
-    $('.row').on('click', '.task-group .group-name', function(){
+    $('.row').on('click', '.task-group:not(.new) .group-name', function(){
       $(this).find('.text-holder').hide();
       $(this).find('.form-holder').show();
       $(this).find('.form-holder').find('input').focus();
@@ -137,6 +138,7 @@
   proto._newGroup = function(){
     $('.task-group.new').on('ajax:success', function(e, data, status, xhr){
       var group_container = $(this).parent();
+      $(this).find('input[name="group[name]"]').val('');
 
       $.get('groups/' + data.group.id + '/html', function(data){
         $(data).insertBefore(group_container);
