@@ -19,6 +19,7 @@
     this._restoreAllTask();
     this._editTask();
     this._newTask();
+    this._dragTask();
     this._editGroup();
     this._newGroup();
     this._removeGroup();
@@ -92,6 +93,27 @@
       });
 
       taskTracker.update_flash(data.message);
+    });
+  }
+
+  proto._dragTask = function(){
+    $(document).ready(function(){
+      $("table tbody").sortable({
+        connectWith: 'table tbody',
+        receive: function(event, ui){
+          var group_id =  ui.item.parents('.todo_tasks').data('group-id');
+          var task_id =  ui.item.data('task-id');
+
+          $.ajax({
+            url: 'tasks/' + task_id,
+            data: { task: { group_id: group_id }},
+            type: 'PUT',
+            success: function(data) {
+              taskTracker.update_flash(data.message);
+            }
+          });
+        }
+      });
     });
   }
 
