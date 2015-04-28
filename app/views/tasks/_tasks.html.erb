@@ -1,7 +1,13 @@
 <table class="table table-condensed table-striped table-hover tasks-list">
   <tbody>
-    <% tasks.each do |task| %>
-      <%= render partial: 'task', locals: { task: task }%>
-    <% end %>
+
+      <tr class="initial-placeholder">
+          <td>No tasks yet</td>
+      </tr>
+
+      <% tasks.each do |task| %>
+        <%= render partial: 'task', locals: { task: task }%>
+      <% end %>
+
   </tbody>
 </table>

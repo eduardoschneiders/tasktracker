@@ -38,11 +38,27 @@
     }
   }
 
+  .tasks-list tbody {
+    min-width: 100%;
+    min-height: 30px;
+    float: left;
+
+    tr {
+      width: 100%;
+      float: left;
+    }
+  }
+
   .tasks-list tr {
     .edit, .remove  { opacity: 0; }
     &:hover         { .edit, .remove { opacity: 1; } }
+    &.placeholder     { background: #DDD; }
+
+    &.initial-placeholder { display: none; }
+    &:only-child { display: block; };
 
     td {
+      &.name { width: 100% };
       &.actions { width: 25px; text-align: center; }
 
       &.name {

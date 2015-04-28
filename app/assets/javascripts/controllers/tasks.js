@@ -161,8 +161,10 @@
   }
 
   proto.dragFunction = function(data){
-    $(data.find(".tasks-list tbody")).sortable({
-      connectWith: '.tasks-list tbody',
+    $(data.find(".todo_tasks .tasks-list tbody")).sortable({
+      connectWith: '.todo_tasks .tasks-list tbody',
+      placeholder: 'placeholder',
+      cancel: 'tr.initial-placeholder',
       receive: function(event, ui){
         var group_id =  ui.item.parents('.todo_tasks').data('group-id');
         var task_id =  ui.item.data('task-id');
