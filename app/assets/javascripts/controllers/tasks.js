@@ -98,23 +98,8 @@
 
   proto._dragTask = function(){
     $(document).ready(function(){
-      $(".tasks-list tbody").sortable({
-        connectWith: '.tasks-list tbody',
-        receive: function(event, ui){
-          var group_id =  ui.item.parents('.todo_tasks').data('group-id');
-          var task_id =  ui.item.data('task-id');
-
-          $.ajax({
-            url: 'tasks/' + task_id,
-            data: { task: { group_id: group_id }},
-            type: 'PUT',
-            success: function(data) {
-              taskTracker.update_flash(data.message);
-            }
-          });
-        }
-      });
-    });
+      this.dragFunction($('body'));
+    }.bind(this));
   }
 
   proto._restoreTask = function(){
@@ -159,19 +144,38 @@
 
   proto._newGroup = function(){
     $('.task-group.new').on('ajax:success', function(e, data, status, xhr){
-      var group_container = $(this).parent();
-      $(this).find('input[name="group[name]"]').val('');
+      self = e.target;
+      var group_container = $(self).parents('.task-group.new').parent();
+
+      group_container.find('input[name="group[name]"]').val('');
 
       $.get('groups/' + data.group.id + '/html', function(data){
         var $data = $(data);
 
         $($data).insertBefore(group_container);
-        $($data).find('tbody').sortable({
-          connectWith: 'table tbody'
-        });
-      });
+        this.dragFunction($data);
+      }.bind(this));
 
       taskTracker.update_flash(data.message);
+    }.bind(this));
+  }
+
+  proto.dragFunction = function(data){
+    $(data.find(".tasks-list tbody")).sortable({
+      connectWith: '.tasks-list tbody',
+      receive: function(event, ui){
+        var group_id =  ui.item.parents('.todo_tasks').data('group-id');
+        var task_id =  ui.item.data('task-id');
+
+        $.ajax({
+          url: 'tasks/' + task_id,
+          data: { task: { group_id: group_id }},
+          type: 'PUT',
+          success: function(data) {
+            taskTracker.update_flash(data.message);
+          }
+        });
+      }
     });
   }
 
