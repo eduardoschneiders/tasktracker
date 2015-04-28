@@ -98,8 +98,8 @@
 
   proto._dragTask = function(){
     $(document).ready(function(){
-      $("table tbody").sortable({
-        connectWith: 'table tbody',
+      $(".tasks-list tbody").sortable({
+        connectWith: '.tasks-list tbody',
         receive: function(event, ui){
           var group_id =  ui.item.parents('.todo_tasks').data('group-id');
           var task_id =  ui.item.data('task-id');
@@ -163,7 +163,12 @@
       $(this).find('input[name="group[name]"]').val('');
 
       $.get('groups/' + data.group.id + '/html', function(data){
-        $(data).insertBefore(group_container);
+        var $data = $(data);
+
+        $($data).insertBefore(group_container);
+        $($data).find('tbody').sortable({
+          connectWith: 'table tbody'
+        });
       });
 
       taskTracker.update_flash(data.message);
