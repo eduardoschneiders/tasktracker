@@ -9,25 +9,27 @@ User.delete_all
 Task.delete_all
 user = User.create(name: 'Eduardo', email: 'eduardo@gmail.com', password: 'p@ssw0rd')
 
+group = Group.create(name: 'Task Tracker', user: user)
+
 5.times do |i|
-  Task.create(name: "Task seed completed #{i}", user: user, completed: true, completed_at: Time.now, created_at: 1.day.ago)
+  Task.create(name: "Task seed completed #{i}", user: user, group: group, completed: true, completed_at: Time.now, created_at: 1.day.ago)
 end
 
-t_before1 = Task.create(name: "Task seed todo before 30 days", user: user, created_at: 8.months.ago)
-t_before2 = Task.create(name: "Task seed todo before 30 days", user: user, created_at: 8.months.ago)
-t_before3 = Task.create(name: "Task seed todo before 30 days", user: user, created_at: 5.months.ago)
-t_before4 = Task.create(name: "Task seed todo before 30 days", user: user, created_at: 5.months.ago)
-t_before5 = Task.create(name: "Task seed todo before 30 days", user: user, created_at: 4.months.ago)
-t_before6 = Task.create(name: "Task seed todo before 30 days", user: user, created_at: 4.months.ago)
-t_before7 = Task.create(name: "Task seed todo before 30 days", user: user, created_at: 3.months.ago)
-t_before8 = Task.create(name: "Task seed todo before 30 days", user: user, created_at: 3.months.ago)
-t_before9 = Task.create(name: "Task seed todo before 30 days", user: user, created_at: 2.months.ago)
-t_before10 = Task.create(name: "Task seed todo before 30 days", user: user, created_at: 2.months.ago)
+t_before1 = Task.create(name: "Task seed todo before 30 days", user: user, group: group, created_at: 8.months.ago)
+t_before2 = Task.create(name: "Task seed todo before 30 days", user: user, group: group, created_at: 8.months.ago)
+t_before3 = Task.create(name: "Task seed todo before 30 days", user: user, group: group, created_at: 5.months.ago)
+t_before4 = Task.create(name: "Task seed todo before 30 days", user: user, group: group, created_at: 5.months.ago)
+t_before5 = Task.create(name: "Task seed todo before 30 days", user: user, group: group, created_at: 4.months.ago)
+t_before6 = Task.create(name: "Task seed todo before 30 days", user: user, group: group, created_at: 4.months.ago)
+t_before7 = Task.create(name: "Task seed todo before 30 days", user: user, group: group, created_at: 3.months.ago)
+t_before8 = Task.create(name: "Task seed todo before 30 days", user: user, group: group, created_at: 3.months.ago)
+t_before9 = Task.create(name: "Task seed todo before 30 days", user: user, group: group, created_at: 2.months.ago)
+t_before10 = Task.create(name: "Task seed todo before 30 days", user: user, group: group, created_at: 2.months.ago)
 
-t1 = Task.create(name: "Task seed todo 1", user: user, created_at: 29.days.ago)
-t2 = Task.create(name: "Task seed todo 2", user: user, created_at: 25.days.ago)
-t3 = Task.create(name: "Task seed todo 3", user: user, created_at: 20.days.ago)
-t4 = Task.create(name: "Task seed todo 4", user: user, created_at: 15.days.ago)
+t1 = Task.create(name: "Task seed todo 1", user: user, group: group, created_at: 29.days.ago)
+t2 = Task.create(name: "Task seed todo 2", user: user, group: group, created_at: 25.days.ago)
+t3 = Task.create(name: "Task seed todo 3", user: user, group: group, created_at: 20.days.ago)
+t4 = Task.create(name: "Task seed todo 4", user: user, group: group, created_at: 15.days.ago)
 
 t1.update_attributes(completed: true, completed_at: 28.days.ago)
 t2.update_attributes(completed: true, completed_at: 24.days.ago)
