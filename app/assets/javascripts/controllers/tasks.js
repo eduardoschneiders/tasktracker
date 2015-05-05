@@ -34,7 +34,9 @@
       $(self).attr('class', 'uncomplete');
       $(self).removeClass('complete').addClass('uncomplete');
       done_tab = $(self).parents('.todo_tasks').next().find('table');
-      $(self).parents('tr').appendTo(done_tab);
+      $(self).parents('tr').slideUp('fast', function(){
+        $(this).appendTo(done_tab).show();
+      });
     }.bind(this));
   }
 
@@ -46,7 +48,9 @@
       $(self).data('url', complete_path);
       $(self).removeClass('uncomplete').addClass('complete');
       todo_tab = $(self).parents('.done_tasks').prev().find('table');
-      $(self).parents('tr').appendTo(todo_tab);
+      $(self).parents('tr').slideUp('fast', function(){
+        $(this).appendTo(todo_tab).show();
+      });
     }.bind(this));
   }
 
