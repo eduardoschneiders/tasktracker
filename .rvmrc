@@ -1,2 +1,1 @@
-rvm_install_on_use_flag=1
-rvm gemset use --create 1.9.3@objective
+ rvm use --create 2.2-head
