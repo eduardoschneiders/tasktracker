@@ -5,7 +5,7 @@
 
 <div class="clear"></div>
 
-<div class="row">
+<div class="row" style="position: relative;">
   <% @groups.each do |group| %>
     <%= render partial: 'group_tasks', locals: { group: group } %>
   <% end %>

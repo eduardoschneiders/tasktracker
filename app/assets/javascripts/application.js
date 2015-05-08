@@ -17,5 +17,6 @@
 //= require turbolinks
 //= require morris.min
 //= require raphael-min
+//= require wookmark
 //= require common
 //= require_tree ./controllers

@@ -149,7 +149,7 @@
   proto._newGroup = function(){
     $('.task-group.new').on('ajax:success', function(e, data, status, xhr){
       self = e.target;
-      var group_container = $(self).parents('.task-group.new').parent();
+      var group_container = $(self).parents('.task-group.new');
 
       group_container.find('input[name="group[name]"]').val('');
 
@@ -158,7 +158,11 @@
 
         $($data).insertBefore(group_container);
         this.dragFunction($data);
+        
+        handler = $('.container .row');
+        handler.trigger('applyWookmark');
       }.bind(this));
+
 
       taskTracker.update_flash(data.message);
     }.bind(this));
@@ -187,7 +191,10 @@
 
   proto._removeGroup = function(){
     $('.row').on('ajax:success', '.task-group .remove-group', function(e, data, status, xhr){
-      $(this).parents('.task-group').parent().remove();
+      $(this).parents('.task-group').remove()
+        
+        handler = $('.container .row');
+        handler.trigger('applyWookmark');
       taskTracker.update_flash(data.message);
     });
   }

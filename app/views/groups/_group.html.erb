@@ -1,33 +1,32 @@
-<div class="col-sm-4">
-  <div class="task-group">
-    <h5 class="group-name">
-      <div class="text-holder">
-        <%= group.name %>
-      </div>
-      <div class="form-holder">
-        <%= form_for group, remote: true do |f| %>
-          <%= f.text_field :name %>
-        <% end %>
-      </div>
-    </h5>
 
-    <%= link_to 'X', group_path(group), class: 'remove-group', data: { confirm: 'Are your sure?' }, method: :delete, remote: true %>
+<div class="task-group">
+  <h5 class="group-name">
+    <div class="text-holder">
+      <%= group.name %>
+    </div>
+    <div class="form-holder">
+      <%= form_for group, remote: true do |f| %>
+        <%= f.text_field :name %>
+      <% end %>
+    </div>
+  </h5>
 
-    <ul id="tasks-tab" class="tasks nav nav-tabs">
-      <li role="presentation" class="active"><a href="<%= "#group_task_#{group.id}_todo" %>" data-toggle="tab">To do</a></li>
-      <li role="presentation"><a href="<%= "#group_task_#{group.id}_done" %>" data-toggle="tab">Done</a></li>
-    </ul>
+  <%= link_to 'X', group_path(group), class: 'remove-group', data: { confirm: 'Are your sure?' }, method: :delete, remote: true %>
 
-    <div id="tab-content" class="tab-content">
-      <div class="tab-pane todo_tasks active" data-group-id="<%= group.id %>" id="<%= "group_task_#{group.id}_todo" %>">
-        <%= render partial: 'tasks/tasks', locals: { tasks:  group.tasks.uncompleted.where(user: current_user) } %>
-      </div>
-      <div class="tab-pane done_tasks" id="<%= "group_task_#{group.id}_done" %>">
-        <%= render partial: 'tasks/tasks', locals: { tasks:  group.tasks.completed.where(user: current_user) } %>
-      </div>
-      <div class="new_task">
-        <%= render partial: 'tasks/new_task', locals: { group_id: group.id } %>
-      </div>
+  <ul id="tasks-tab" class="tasks nav nav-tabs">
+    <li role="presentation" class="active"><a href="<%= "#group_task_#{group.id}_todo" %>" data-toggle="tab">To do</a></li>
+    <li role="presentation"><a href="<%= "#group_task_#{group.id}_done" %>" data-toggle="tab">Done</a></li>
+  </ul>
+
+  <div id="tab-content" class="tab-content">
+    <div class="tab-pane todo_tasks active" data-group-id="<%= group.id %>" id="<%= "group_task_#{group.id}_todo" %>">
+      <%= render partial: 'tasks/tasks', locals: { tasks:  group.tasks.uncompleted.where(user: current_user) } %>
+    </div>
+    <div class="tab-pane done_tasks" id="<%= "group_task_#{group.id}_done" %>">
+      <%= render partial: 'tasks/tasks', locals: { tasks:  group.tasks.completed.where(user: current_user) } %>
+    </div>
+    <div class="new_task">
+      <%= render partial: 'tasks/new_task', locals: { group_id: group.id } %>
     </div>
   </div>
 </div>
