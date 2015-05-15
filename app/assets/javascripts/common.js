@@ -10,13 +10,20 @@ taskTracker.update_flash = function(message){
 taskTracker.hide_message = function(){
   $('#notice').fadeOut('fast');
 }
+function equality(force){
+  $('.todo_tasks').each(function(){
+    todo_itens_count = $(this).find('table tbody tr:not(.initial-placeholder)').length;
+    if (force || todo_itens_count >= 10){
+      todo_height_tab = $(this).height();
+      $(this).next().height(todo_height_tab);
+    }
+  })
+}
 
 $(document).ready(function (){
   $('#notice').delay(3000).fadeOut('fast');
-
   $('#tasks-tab').tab();
-
-  handler = $('.container .row');
+  equality(true);
 
   options = {
     autoResize: true,
@@ -25,15 +32,10 @@ $(document).ready(function (){
   var wookmark = new Wookmark('.container .row', options);
   
   $('.container').on('applyWookmark', '.row', function(event){
-    console.log('refresh');    
-
+    equality(false);
     wookmark.initItems();
-    wookmark.layout(true, function () {
-      // Fade in items after layout
-      setTimeout(function() {
-        console.log('asdf');
-      }, 300);
-    });
+    wookmark.layout(true);
+
   })
 })
 

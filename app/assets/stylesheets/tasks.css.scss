@@ -49,6 +49,12 @@
     }
   }
 
+  .done_tasks {
+    overflow: scroll;
+    height: 150px;
+    overflow-x: hidden;
+  }
+
   .tasks-list tr {
     .edit, .remove  { opacity: 0; }
     &:hover         { .edit, .remove { opacity: 1; } }

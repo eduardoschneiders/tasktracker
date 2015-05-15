@@ -36,6 +36,7 @@
       done_tab = $(self).parents('.todo_tasks').next().find('table');
       $(self).parents('tr').slideUp('fast', function(){
         $(this).appendTo(done_tab).show();
+        $('.container .row').trigger('applyWookmark');
       });
     }.bind(this));
   }
@@ -50,6 +51,7 @@
       todo_tab = $(self).parents('.done_tasks').prev().find('table');
       $(self).parents('tr').slideUp('fast', function(){
         $(this).appendTo(todo_tab).show();
+        $('.container .row').trigger('applyWookmark');
       });
     }.bind(this));
   }
@@ -94,9 +96,11 @@
 
       $.get('tasks/' + data.task.id + '/html', function(data){
         todo_tasks_container.append(data);
+
+        $('.container .row').trigger('applyWookmark');
+        taskTracker.update_flash(data.message);
       });
 
-      taskTracker.update_flash(data.message);
     });
   }
 
@@ -159,8 +163,7 @@
         $($data).insertBefore(group_container);
         this.dragFunction($data);
         
-        handler = $('.container .row');
-        handler.trigger('applyWookmark');
+        $('.container .row').trigger('applyWookmark');
       }.bind(this));
 
 
@@ -182,6 +185,8 @@
           data: { task: { group_id: group_id }},
           type: 'PUT',
           success: function(data) {
+            $('.container .row').trigger('applyWookmark');
+
             taskTracker.update_flash(data.message);
           }
         });
@@ -193,8 +198,7 @@
     $('.row').on('ajax:success', '.task-group .remove-group', function(e, data, status, xhr){
       $(this).parents('.task-group').remove()
         
-        handler = $('.container .row');
-        handler.trigger('applyWookmark');
+        $('.container .row').trigger('applyWookmark');
       taskTracker.update_flash(data.message);
     });
   }
