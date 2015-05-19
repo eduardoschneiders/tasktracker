@@ -105,7 +105,7 @@
   }
 
   proto._dragTask = function(){
-    $(document).ready(function(){
+    $(document).on('ready page:load', function(){
       this.dragFunction($('body'));
     }.bind(this));
   }

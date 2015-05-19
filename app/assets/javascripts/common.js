@@ -20,7 +20,7 @@ function equality(force){
   })
 }
 
-$(document).ready(function (){
+$(document).on('ready page:load', function (){
   $('#notice').delay(3000).fadeOut('fast');
   $('#tasks-tab').tab();
   equality(true);
