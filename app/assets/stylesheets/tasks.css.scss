@@ -38,6 +38,10 @@
     }
   }
 
+  .todo_tasks, .done_tasks {
+    min-height: 150px;
+  }
+
   .tasks-list tbody {
     min-width: 100%;
     min-height: 30px;
