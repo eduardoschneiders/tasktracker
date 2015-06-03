@@ -24,6 +24,7 @@ ObjectivesTracker::Application.routes.draw do
 
    get 'tasks/:id/html' => 'tasks#html', as: :html_task
    get 'groups/:id/html' => 'groups#html', as: :html_group
+   put 'groups/:id/increment_tasks' => 'groups#increment_tasks', as: :increment_tasks
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
