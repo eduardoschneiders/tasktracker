@@ -177,17 +177,53 @@
       placeholder: 'placeholder',
       cancel: 'tr.initial-placeholder',
       receive: function(event, ui){
-        var group_id =  ui.item.parents('.todo_tasks').data('group-id');
+        var sender_group_id =  ui.sender.parents('.todo_tasks').data('group-id');
+        var receiver_group_id =  ui.item.parents('.todo_tasks').data('group-id');
         var task_id =  ui.item.data('task-id');
+
+        // console.log(ui);
+        // console.log('sender: ' + sender_group_id);
+        // console.log('receiver: ' + receiver_group_id);
 
         $.ajax({
           url: 'tasks/' + task_id,
-          data: { task: { group_id: group_id }},
+          data: { task: { group_id: receiver_group_id }},
           type: 'PUT',
           success: function(data) {
             $('.container .row').trigger('applyWookmark');
 
             taskTracker.update_flash(data.message);
+          }
+        });
+      },
+      stop: function(event, ui){
+        var item                = ui.item;
+        var current_item_order  = item.prev().data('task-order') ? item.prev().data('task-order') + 1 : 0;
+        var next_itens          = item.nextAll();
+        var receiver_group_id   = ui.item.parents('.todo_tasks').data('group-id');
+        var current_task_id     = item.data('task-id');
+        var tasks_id            = new Array();
+
+        item.data('task-order', current_item_order);
+
+        next_itens.each(function(index, item){
+          tasks_id.push($(item).data('task-id'));
+          $(item).data('task-order', $(item).data('task-order') + 1);
+          console.log($(item).data('task-order'));
+        });
+
+        var params = {
+          current_order: current_item_order,
+          current_task_id: current_task_id, 
+          tasks_id: tasks_id 
+        };
+
+        $.ajax({
+          url: 'groups/' + receiver_group_id + '/increment_tasks',
+          data: params,
+          type: 'PUT',
+          success: function(data) {
+            console.log('put completed');
           }
         });
       }

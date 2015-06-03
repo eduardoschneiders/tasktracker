@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150311202230) do
+ActiveRecord::Schema.define(version: 20150520160805) do
 
   create_table "groups", force: true do |t|
     t.string  "name"
@@ -30,9 +30,11 @@ ActiveRecord::Schema.define(version: 20150311202230) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "group_id"
+    t.integer  "order"
   end
 
   add_index "tasks", ["group_id"], name: "index_tasks_on_group_id"
+  add_index "tasks", ["order"], name: "index_tasks_on_order"
   add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
 
   create_table "users", force: true do |t|

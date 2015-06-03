@@ -45,6 +45,22 @@ class GroupsController < ApplicationController
     render partial: 'group', locals: { group: group }
   end
 
+  def increment_tasks
+    group         = Group.find(params[:id])
+    tasks_id      = params.fetch(:tasks_id, [])
+    current_task  = group.tasks.find(params[:current_task_id])
+
+    require 'pry'; binding.pry
+    current_task.update_attributes(order: params[:current_order])
+    group.tasks.update_counters(tasks_id, order: 1)
+
+    respond_to do |format|
+      format.json { render nothing: true, status: :created }
+    end
+
+
+  end
+
   private
 
   def destroy_group_tasks

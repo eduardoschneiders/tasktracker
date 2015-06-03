@@ -7,9 +7,11 @@ taskTracker.update_flash = function(message){
   $('#notice').fadeIn('fast');
   this.timeoutID = window.setTimeout(taskTracker.hide_message, 3000);
 }
+
 taskTracker.hide_message = function(){
   $('#notice').fadeOut('fast');
 }
+
 function balance_height(){
   $('.todo_tasks').each(function(){
     var todo_tab = $(this);
@@ -30,6 +32,7 @@ $(document).on('ready page:load', function (){
     autoResize: true,
     offset: 10, // Optional, the distance between grid items
   };
+
   var wookmark = new Wookmark('.container .row', options);
   
   $('.container').on('applyWookmark', '.row', function(event){
@@ -39,5 +42,3 @@ $(document).on('ready page:load', function (){
 
   })
 })
-
-
