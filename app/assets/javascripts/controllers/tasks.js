@@ -202,12 +202,12 @@
         var next_itens          = item.nextAll();
         var receiver_group_id   = ui.item.parents('.todo_tasks').data('group-id');
         var current_task_id     = item.data('task-id');
-        var tasks_id            = new Array();
+        var next_tasks_id       = new Array();
 
         item.data('task-order', current_item_order);
 
         next_itens.each(function(index, item){
-          tasks_id.push($(item).data('task-id'));
+          next_tasks_id.push($(item).data('task-id'));
           $(item).data('task-order', $(item).data('task-order') + 1);
           console.log($(item).data('task-order'));
         });
@@ -215,7 +215,7 @@
         var params = {
           current_order: current_item_order,
           current_task_id: current_task_id, 
-          tasks_id: tasks_id 
+          next_tasks_id: next_tasks_id 
         };
 
         $.ajax({
