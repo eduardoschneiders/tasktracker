@@ -209,7 +209,6 @@
         next_itens.each(function(index, item){
           next_tasks_id.push($(item).data('task-id'));
           $(item).data('task-order', $(item).data('task-order') + 1);
-          console.log($(item).data('task-order'));
         });
 
         var params = {
@@ -223,7 +222,6 @@
           data: params,
           type: 'PUT',
           success: function(data) {
-            console.log('put completed');
           }
         });
       }
