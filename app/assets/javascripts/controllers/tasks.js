@@ -198,11 +198,20 @@
       },
       stop: function(event, ui){
         var item                = ui.item;
-        var current_item_order  = item.prev().data('task-order') ? item.prev().data('task-order') + 1 : 0;
         var next_itens          = item.nextAll();
-        var receiver_group_id   = ui.item.parents('.todo_tasks').data('group-id');
+        var receiver_group_id   = item.parents('.todo_tasks').data('group-id');
         var current_task_id     = item.data('task-id');
         var next_tasks_id       = new Array();
+        var current_item_order  = 0;
+
+        var prior_item = item.prev().not('.initial-placeholder');
+        var next_item = item.next().not('.initial-placeholder');
+
+        if (prior_item.length){
+          current_item_order = prior_item.data('task-order') + 1;
+        } else if(next_item.length) {
+          current_item_order = next_item.data('task-order') - 1;
+        }
 
         item.data('task-order', current_item_order);
 
