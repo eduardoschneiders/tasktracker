@@ -45,8 +45,8 @@ class WelcomeController < ApplicationController
 
       tasks                         = { todo: {}, completed: {} }
       unprocessed_tasks             = { todo: [], completed: [] }
-      unprocessed_tasks[:todo]      = current_user.tasks.active.where('created_at >= ?', 1.month.ago).group('date(created_at)').count.to_a
-      unprocessed_tasks[:completed] = current_user.tasks.active.where('completed_at >= ?', 1.month.ago).group('date(completed_at)').count.to_a
+      unprocessed_tasks[:todo]      = current_user.tasks.unscoped.active.where('created_at >= ?', 1.month.ago).group('date(created_at)').count.to_a
+      unprocessed_tasks[:completed] = current_user.tasks.unscoped.active.where('completed_at >= ?', 1.month.ago).group('date(completed_at)').count.to_a
 
       tasks[:todo]      = process_tasks(unprocessed_tasks[:todo], :todo)
       tasks[:completed] = process_tasks(unprocessed_tasks[:completed], :completed)
