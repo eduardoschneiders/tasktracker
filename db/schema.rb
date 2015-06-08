@@ -13,13 +13,16 @@
 
 ActiveRecord::Schema.define(version: 20150520160805) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "groups", force: true do |t|
     t.string  "name"
     t.boolean "deleted", default: false
     t.integer "user_id"
   end
 
-  add_index "groups", ["user_id"], name: "index_groups_on_user_id"
+  add_index "groups", ["user_id"], name: "index_groups_on_user_id", using: :btree
 
   create_table "tasks", force: true do |t|
     t.string   "name"
@@ -33,9 +36,9 @@ ActiveRecord::Schema.define(version: 20150520160805) do
     t.integer  "order"
   end
 
-  add_index "tasks", ["group_id"], name: "index_tasks_on_group_id"
-  add_index "tasks", ["order"], name: "index_tasks_on_order"
-  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id"
+  add_index "tasks", ["group_id"], name: "index_tasks_on_group_id", using: :btree
+  add_index "tasks", ["order"], name: "index_tasks_on_order", using: :btree
+  add_index "tasks", ["user_id"], name: "index_tasks_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
