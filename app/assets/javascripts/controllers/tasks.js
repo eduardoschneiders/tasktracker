@@ -179,11 +179,7 @@
       receive: function(event, ui){
         var sender_group_id =  ui.sender.parents('.todo_tasks').data('group-id');
         var receiver_group_id =  ui.item.parents('.todo_tasks').data('group-id');
-        var task_id =  ui.item.data('task-id');
-
-        // console.log(ui);
-        // console.log('sender: ' + sender_group_id);
-        // console.log('receiver: ' + receiver_group_id);
+        var task_id = ui.item.data('task-id');
 
         $.ajax({
           url: 'tasks/' + task_id,
@@ -191,7 +187,6 @@
           type: 'PUT',
           success: function(data) {
             $('.container .row').trigger('applyWookmark');
-
             taskTracker.update_flash(data.message);
           }
         });
@@ -207,10 +202,10 @@
         var prior_item = item.prev().not('.initial-placeholder');
         var next_item = item.next().not('.initial-placeholder');
 
-        if (prior_item.length){
+        if (next_item.length){
+          current_item_order = next_item.data('task-order');
+        } else if (prior_item.length) {
           current_item_order = prior_item.data('task-order') + 1;
-        } else if(next_item.length) {
-          current_item_order = next_item.data('task-order') - 1;
         }
 
         item.data('task-order', current_item_order);
@@ -223,7 +218,7 @@
         var params = {
           current_order: current_item_order,
           current_task_id: current_task_id, 
-          next_tasks_id: next_tasks_id 
+          tasks_id: next_tasks_id
         };
 
         $.ajax({
